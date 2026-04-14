@@ -7,6 +7,10 @@ use App\Http\Controllers\Backend\SiteSettingsController;
 
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Backend\NewsEvent\NewsEventCategoryController;
+use App\Http\Controllers\Backend\NewsEvent\NewsEventController;
+use App\Http\Controllers\Backend\CompanyServiceController;
+use App\Http\Controllers\Backend\PageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,7 +27,11 @@ Route::middleware([
 
 
     Route::resources([
-        'site-settings' => SiteSettingsController::class,
+        'site-settings'     => SiteSettingsController::class,
+        'news-categories'   => NewsEventCategoryController::class,
+        'news-events'       => NewsEventController::class,
+        'company-services'  => CompanyServiceController::class,
+        'pages'             => PageController::class,
     ]);
     Route::post('site-settings/theme', [SiteSettingsController::class, 'saveTheme'])->name('site-settings.theme');
 
