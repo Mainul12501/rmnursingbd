@@ -11,10 +11,10 @@ use App\Http\Controllers\Backend\NewsEvent\NewsEventCategoryController;
 use App\Http\Controllers\Backend\NewsEvent\NewsEventController;
 use App\Http\Controllers\Backend\CompanyServiceController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Frontend\PageViewController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[PageViewController::class,'home'])->name('home');
+Route::get('/page/{page-slug}',[PageViewController::class,'pageView'])->name('page-slug');
 
 Route::middleware([
     'auth:sanctum',
