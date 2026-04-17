@@ -168,7 +168,7 @@
                     <h5 class="modal-title" id="createEventModalLabel">Create News Event</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('news-events.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('news-events.store') }}" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     <input type="hidden" name="form_mode" value="create">
                     <div class="modal-body">
@@ -204,15 +204,15 @@
                                 @if(old('form_mode') === 'create') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif
                             </div>
                             <div class="col-md-6">
-                                <label for="create_main_image" class="form-label">Main Image</label>
-                                <input type="file" id="create_main_image" name="main_image" class="form-control @if(old('form_mode') === 'create') @error('main_image') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp">
-                                @if(old('form_mode') === 'create') @error('main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
+                                <label class="form-label">Main Image</label>
+                                <input type="file" class="filepond-single" id="create_main_image" name="main_image" accept="image/jpeg, image/png, image/webp">
+                                @if(old('form_mode') === 'create') @error('main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
-                                <label for="create_sub_images" class="form-label">Sub Images</label>
-                                <input type="file" id="create_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'create') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>
-                                @if(old('form_mode') === 'create') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label class="form-label">Sub Images</label>--}}
+{{--                                <input type="file" class="filepond-multiple" id="create_sub_images" name="sub_images[]" multiple accept="image/jpeg, image/png, image/webp">--}}
+{{--                                @if(old('form_mode') === 'create') @error('sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="create_main_content" class="form-label">Main Content</label>
                                 <textarea id="create_main_content" name="main_content" rows="6" class="form-control @if(old('form_mode') === 'create') @error('main_content') is-invalid @enderror @endif" placeholder="Write the event content here...">{{ old('form_mode') === 'create' ? old('main_content') : '' }}</textarea>
@@ -236,7 +236,7 @@
                     <h5 class="modal-title" id="editEventModalLabel">Edit News Event</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editEventForm" method="POST" enctype="multipart/form-data">
+                <form id="editEventForm" method="POST" enctype="multipart/form-data"  style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="form_mode" value="edit">
@@ -274,19 +274,19 @@
                                 @if(old('form_mode') === 'edit') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif
                             </div>
                             <div class="col-md-6">
-                                <label for="edit_main_image" class="form-label">Main Image</label>
-                                <input type="file" id="edit_main_image" name="main_image" class="form-control @if(old('form_mode') === 'edit') @error('main_image') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp">
+                                <label class="form-label">Main Image</label>
+                                <input type="file" class="filepond-single" id="edit_main_image" name="main_image" accept="image/jpeg, image/png, image/webp">
                                 <div class="form-text">Leave empty to keep the existing main image.</div>
-                                @if(old('form_mode') === 'edit') @error('main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
+                                @if(old('form_mode') === 'edit') @error('main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif
                                 <div id="edit_main_image_preview" class="mt-2"></div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="edit_sub_images" class="form-label">Sub Images</label>
-                                <input type="file" id="edit_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'edit') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>
-                                <div class="form-text">Uploading new sub images will replace the existing set.</div>
-                                @if(old('form_mode') === 'edit') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                                <div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div>
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label class="form-label">Sub Images</label>--}}
+{{--                                <input type="file" class="filepond-multiple" id="edit_sub_images" name="sub_images[]" multiple accept="image/jpeg, image/png, image/webp">--}}
+{{--                                <div class="form-text">Uploading new sub images will replace the existing set.</div>--}}
+{{--                                @if(old('form_mode') === 'edit') @error('sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif--}}
+{{--                                <div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div>--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="edit_main_content" class="form-label">Main Content</label>
                                 <textarea id="edit_main_content" name="main_content" rows="6" class="form-control @if(old('form_mode') === 'edit') @error('main_content') is-invalid @enderror @endif" placeholder="Write the event content here...">{{ old('form_mode') === 'edit' ? old('main_content') : '' }}</textarea>
@@ -305,6 +305,9 @@
 @endsection
 
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond/filepond.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css') }}">
     <style>
         .form-check-lg .form-check-input {
             width: 2.75rem;
@@ -324,6 +327,9 @@
             border-radius: 8px;
             border: 1px solid #dee2e6;
         }
+        .filepond--root { margin-bottom: 0; }
+        .filepond--panel-root { background-color: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 0.5rem; }
+        .filepond--drop-label { color: #6c757d; }
     </style>
 @endpush
 
@@ -331,6 +337,73 @@
     @include('backend.user-management.toasts')
     @include('backend.includes.plugins.datatable')
     @include('backend.includes.plugins.sweetalert2')
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
+    <!-- FilePond JS -->
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond/filepond.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
+    <script>
+        // Register FilePond plugins
+        FilePond.registerPlugin(
+            FilePondPluginImagePreview,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginFileValidateSize,
+            FilePondPluginFileValidateType,
+            FilePondPluginFileEncode
+        );
+
+        // Common FilePond config
+        const filepondConfig = {
+            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+            maxFileSize: '3MB',
+            labelIdle: 'Drag & Drop your image or <span class="filepond--label-action">Browse</span>',
+            imagePreviewHeight: 140,
+            credits: false,
+        };
+
+        // Create modal - single main image
+        FilePond.create(document.querySelector('#create_main_image'), {
+            ...filepondConfig,
+            allowMultiple: false,
+            labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
+        });
+
+        // Create modal - multiple sub images
+        FilePond.create(document.querySelector('#create_sub_images'), {
+            ...filepondConfig,
+            allowMultiple: true,
+            maxFiles: 10,
+            allowReorder: true,
+            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        });
+
+        // Edit modal - single main image
+        FilePond.create(document.querySelector('#edit_main_image'), {
+            ...filepondConfig,
+            allowMultiple: false,
+            labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
+        });
+
+        // Edit modal - multiple sub images
+        FilePond.create(document.querySelector('#edit_sub_images'), {
+            ...filepondConfig,
+            allowMultiple: true,
+            maxFiles: 10,
+            allowReorder: true,
+            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        });
+    </script>
+    <script>
+        $(function () {
+            CKEDITOR.replace( 'create_main_content', {
+                versionCheck: false,
+            } );
+        })
+    </script>
     <script>
         function syncNewsEventSlug(sourceId, previewId, hiddenId) {
             const sourceInput = document.getElementById(sourceId);

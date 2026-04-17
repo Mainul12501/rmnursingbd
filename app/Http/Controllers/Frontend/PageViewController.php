@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyService;
 use Illuminate\Http\Request;
 
 class PageViewController extends Controller
@@ -17,15 +18,15 @@ class PageViewController extends Controller
     }
     public function contactUs(Request $request)
     {
-        return view('frontend.common-pages.page');
+        return view('frontend.common-pages.contact-us');
     }
-    public function serviceDetails(Request $request)
+    public function serviceDetails(Request $request, $companyServiceSlug)
     {
         return view('frontend.services.service-details');
     }
     public function serviceCategories(Request $request)
     {
-        return view('frontend.services.service-categories');
+        return view('frontend.services.service-category');
     }
     public function newsEvents(Request $request)
     {

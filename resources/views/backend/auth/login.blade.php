@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-vertical-style="overlay" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
 
-
-<!-- Mirrored from laravelui.spruko.com/valex/signin by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 31 Jan 2026 01:12:20 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <!-- Meta Data -->
     <meta charset="UTF-8">
@@ -14,7 +12,7 @@
     <meta name="keywords" content="laravel, framework laravel, laravel template, admin, laravel dashboard, template dashboard, admin dashboard ui, bootstrap dashboard, laravel framework, vite laravel, bootstrap 5 templates, laravel admin panel, laravel tailwind, admin panel, template admin, bootstrap admin panel.">
 
     <!-- TITLE -->
-    <title> Valex - Laravel Bootstrap 5 Premium Admin & Dashboard Template </title>
+    <title> RmNursingBd - Login </title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/') }}backend/build/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -521,24 +519,24 @@
                                                                                                   placeholder="Enter your password" type="password" name="password" value="123">
                                             </div>
                                             <button type="submit"  class="btn btn-primary btn-block w-100">Sign In</button>
-                                            <div class="row mt-3">
-                                                <div class="col-sm-6">
-                                                    <button class="btn btn-block w-100 btn-facebook"><i
-                                                            class="fab fa-facebook-f me-2"></i> Signup with
-                                                        Facebook</button>
-                                                </div>
-                                                <div class="col-sm-6 mt-2 mt-sm-0">
-                                                    <button class="btn btn-info btn-block w-100"><i
-                                                            class="ri-twitter-x-fill me-2"></i> Signup with
-                                                        Twitter</button>
-                                                </div>
-                                            </div>
+{{--                                            <div class="row mt-3">--}}
+{{--                                                <div class="col-sm-6">--}}
+{{--                                                    <button class="btn btn-block w-100 btn-facebook"><i--}}
+{{--                                                            class="fab fa-facebook-f me-2"></i> Signup with--}}
+{{--                                                        Facebook</button>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-sm-6 mt-2 mt-sm-0">--}}
+{{--                                                    <button class="btn btn-info btn-block w-100"><i--}}
+{{--                                                            class="ri-twitter-x-fill me-2"></i> Signup with--}}
+{{--                                                        Twitter</button>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                         </form>
-                                        <div class="main-signin-footer mt-5">
-                                            <p class="mb-1"><a href="forgot.html">Forgot password?</a></p>
-                                            <p>Don't have an account? <a href="signup.html">Create an
-                                                    Account</a></p>
-                                        </div>
+{{--                                        <div class="main-signin-footer mt-5">--}}
+{{--                                            <p class="mb-1"><a href="forgot.html">Forgot password?</a></p>--}}
+{{--                                            <p>Don't have an account? <a href="signup.html">Create an--}}
+{{--                                                    Account</a></p>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>

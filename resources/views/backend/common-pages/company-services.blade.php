@@ -119,7 +119,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header"><h5 class="modal-title" id="createServiceModalLabel">Create Company Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <form action="{{ route('company-services.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('company-services.store') }}" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     <input type="hidden" name="form_mode" value="create">
                     <div class="modal-body">
@@ -129,8 +129,8 @@
                             <div class="col-md-4"><label for="create_slug" class="form-label">Slug</label><input type="text" id="create_slug" class="form-control @if(old('form_mode') === 'create') @error('slug') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('slug') : '' }}" placeholder="Slug will be generated automatically" readonly tabindex="-1"><input type="hidden" id="create_slug_hidden" name="slug" value="{{ old('form_mode') === 'create' ? old('slug') : '' }}">@if(old('form_mode') === 'create') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                             <div class="col-md-4"><label for="create_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="create_service_menu_type" name="service_menu_type" class="form-select @if(old('form_mode') === 'create') @error('service_menu_type') is-invalid @enderror @endif"><option value="main" {{ old('form_mode') === 'create' ? (old('service_menu_type', 'main') === 'main' ? 'selected' : '') : 'selected' }}>Main</option><option value="sub" {{ old('form_mode') === 'create' && old('service_menu_type') === 'sub' ? 'selected' : '' }}>Sub</option><option value="both" {{ old('form_mode') === 'create' && old('service_menu_type') === 'both' ? 'selected' : '' }}>Both</option></select>@if(old('form_mode') === 'create') @error('service_menu_type') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                             <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input @if(old('form_mode') === 'create') @error('status') is-invalid @enderror @endif" type="checkbox" role="switch" id="create_status" name="status" value="1" {{ old('form_mode') === 'create' ? (old('status', 1) == 1 ? 'checked' : '') : 'checked' }}><label class="form-check-label fw-semibold" for="create_status">Active</label></div>@if(old('form_mode') === 'create') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label for="create_page_main_image" class="form-label">Main Image</label><input type="file" id="create_page_main_image" name="page_main_image" class="form-control @if(old('form_mode') === 'create') @error('page_main_image') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp">@if(old('form_mode') === 'create') @error('page_main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label for="create_page_sub_images" class="form-label">Sub Images</label><input type="file" id="create_page_sub_images" name="page_sub_images[]" class="form-control @if(old('form_mode') === 'create') @error('page_sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>@if(old('form_mode') === 'create') @error('page_sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
+                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" class="filepond-single" id="create_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp">@if(old('form_mode') === 'create') @error('page_main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif</div>
+{{--                            <div class="col-md-6"><label class="form-label">Sub Images</label><input type="file" class="filepond-multiple" id="create_page_sub_images" name="page_sub_images[]" multiple accept="image/jpeg, image/png, image/webp">@if(old('form_mode') === 'create') @error('page_sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif</div>--}}
                             <div class="col-12"><label for="create_page_content" class="form-label">Page Content</label><textarea id="create_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'create') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'create' ? old('page_content') : '' }}</textarea>@if(old('form_mode') === 'create') @error('page_content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header"><h5 class="modal-title" id="editServiceModalLabel">Edit Company Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <form id="editServiceForm" method="POST" enctype="multipart/form-data">
+                <form id="editServiceForm" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="form_mode" value="edit">
@@ -156,8 +156,8 @@
                             <div class="col-md-4"><label for="edit_slug" class="form-label">Slug</label><input type="text" id="edit_slug" class="form-control @if(old('form_mode') === 'edit') @error('slug') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('slug') : '' }}" placeholder="Slug will be generated automatically" readonly tabindex="-1"><input type="hidden" id="edit_slug_hidden" name="slug" value="{{ old('form_mode') === 'edit' ? old('slug') : '' }}">@if(old('form_mode') === 'edit') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                             <div class="col-md-4"><label for="edit_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="edit_service_menu_type" name="service_menu_type" class="form-select @if(old('form_mode') === 'edit') @error('service_menu_type') is-invalid @enderror @endif"><option value="main" {{ old('form_mode') === 'edit' && old('service_menu_type', 'main') === 'main' ? 'selected' : '' }}>Main</option><option value="sub" {{ old('form_mode') === 'edit' && old('service_menu_type') === 'sub' ? 'selected' : '' }}>Sub</option><option value="both" {{ old('form_mode') === 'edit' && old('service_menu_type') === 'both' ? 'selected' : '' }}>Both</option></select>@if(old('form_mode') === 'edit') @error('service_menu_type') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                             <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input @if(old('form_mode') === 'edit') @error('status') is-invalid @enderror @endif" type="checkbox" role="switch" id="edit_status" name="status" value="1" {{ old('form_mode') === 'edit' ? (old('status', 1) == 1 ? 'checked' : '') : false }}><label class="form-check-label fw-semibold" for="edit_status">Active</label></div>@if(old('form_mode') === 'edit') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label for="edit_page_main_image" class="form-label">Main Image</label><input type="file" id="edit_page_main_image" name="page_main_image" class="form-control @if(old('form_mode') === 'edit') @error('page_main_image') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp"><div class="form-text">Leave empty to keep the existing main image.</div>@if(old('form_mode') === 'edit') @error('page_main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif<div id="edit_main_image_preview" class="mt-2"></div></div>
-                            <div class="col-md-6"><label for="edit_page_sub_images" class="form-label">Sub Images</label><input type="file" id="edit_page_sub_images" name="page_sub_images[]" class="form-control @if(old('form_mode') === 'edit') @error('page_sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple><div class="form-text">Uploading new sub images will replace the existing set.</div>@if(old('form_mode') === 'edit') @error('page_sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif<div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div></div>
+                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" class="filepond-single" id="edit_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp"><div class="form-text">Leave empty to keep the existing main image.</div>@if(old('form_mode') === 'edit') @error('page_main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif<div id="edit_main_image_preview" class="mt-2"></div></div>
+{{--                            <div class="col-md-6"><label class="form-label">Sub Images</label><input type="file" class="filepond-multiple" id="edit_page_sub_images" name="page_sub_images[]" multiple accept="image/jpeg, image/png, image/webp"><div class="form-text">Uploading new sub images will replace the existing set.</div>@if(old('form_mode') === 'edit') @error('page_sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif<div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div></div>--}}
                             <div class="col-12"><label for="edit_page_content" class="form-label">Page Content</label><textarea id="edit_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'edit') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'edit' ? old('page_content') : '' }}</textarea>@if(old('form_mode') === 'edit') @error('page_content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
                         </div>
                     </div>
@@ -169,6 +169,9 @@
 @endsection
 
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond/filepond.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css') }}">
     <style>
         .form-check-lg .form-check-input { width: 2.75rem; height: 1.45rem; margin-top: 0.15rem; }
         .bg-primary-subtle { background-color: rgba(var(--primary-rgb), 0.12) !important; }
@@ -179,6 +182,9 @@
         .border-danger-subtle { border-color: rgba(220, 53, 69, 0.24) !important; }
         .service-image-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #dee2e6; }
         .ck-editor__editable_inline { min-height: 220px; }
+        .filepond--root { margin-bottom: 0; }
+        .filepond--panel-root { background-color: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 0.5rem; }
+        .filepond--drop-label { color: #6c757d; }
     </style>
 @endpush
 
@@ -186,7 +192,61 @@
     @include('backend.user-management.toasts')
     @include('backend.includes.plugins.datatable')
     @include('backend.includes.plugins.sweetalert2')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
+    <!-- FilePond JS -->
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond/filepond.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script>
+    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
+    <script>
+        // Register FilePond plugins
+        FilePond.registerPlugin(
+            FilePondPluginImagePreview,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginFileValidateSize,
+            FilePondPluginFileValidateType,
+            FilePondPluginFileEncode
+        );
+
+        const filepondConfig = {
+            acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+            maxFileSize: '3MB',
+            labelIdle: 'Drag & Drop your image or <span class="filepond--label-action">Browse</span>',
+            imagePreviewHeight: 140,
+            credits: false,
+        };
+
+        // Create modal
+        FilePond.create(document.querySelector('#create_page_main_image'), {
+            ...filepondConfig,
+            allowMultiple: false,
+            labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
+        });
+        FilePond.create(document.querySelector('#create_page_sub_images'), {
+            ...filepondConfig,
+            allowMultiple: true,
+            maxFiles: 10,
+            allowReorder: true,
+            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        });
+
+        // Edit modal
+        FilePond.create(document.querySelector('#edit_page_main_image'), {
+            ...filepondConfig,
+            allowMultiple: false,
+            labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
+        });
+        FilePond.create(document.querySelector('#edit_page_sub_images'), {
+            ...filepondConfig,
+            allowMultiple: true,
+            maxFiles: 10,
+            allowReorder: true,
+            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        });
+    </script>
     <script>
         let createServiceEditor = null;
         let editServiceEditor = null;
@@ -203,10 +263,16 @@
 
         function initCompanyServiceEditors() {
             if (!createServiceEditor) {
-                ClassicEditor.create(document.querySelector('#create_page_content')).then(editor => { createServiceEditor = editor; });
+                // ClassicEditor.create(document.querySelector('#create_page_content')).then(editor => { createServiceEditor = editor; });
+                CKEDITOR.replace( 'create_page_content', {
+                    versionCheck: false,
+                } );
             }
             if (!editServiceEditor) {
-                ClassicEditor.create(document.querySelector('#edit_page_content')).then(editor => { editServiceEditor = editor; });
+                // ClassicEditor.create(document.querySelector('#edit_page_content')).then(editor => { editServiceEditor = editor; });
+                CKEDITOR.replace( 'edit_page_content', {
+                    versionCheck: false,
+                } );
             }
         }
 
