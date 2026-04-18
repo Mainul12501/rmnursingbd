@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\CompanyService;
+use App\Models\Page;
+use App\Models\SiteSetting;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -75,6 +78,14 @@ class AppServiceProvider extends ServiceProvider
 
 //            $menuBgImg = in_array($siteSetting?->menu_bg_img, ['bgimg1', 'bgimg2', 'bgimg3', 'bgimg4', 'bgimg5'], true) ? $siteSetting->menu_bg_img : null;
             $view->with($themeBootstrap);
+        });
+
+        View::composer('frontend.master', function ($view) {
+            $view->with([
+                'services'  => CompanyService::where('status', 1)->get(['id', 'name', 'slug']),
+                'pages'  => Page::where('status', 1)->get(['id', 'page_title', 'slug']),
+                'siteSetting'  => SiteSetting::first(),
+            ]);
         });
     }
 }

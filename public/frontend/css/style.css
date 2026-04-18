@@ -1279,3 +1279,9 @@ img { max-width: 100%; height: auto; }
 [id] {
     scroll-margin-top: 80px;
 }
+
+/*custom css start*/
+@media screen and (max-width: 576px) {
+    .footer-book-appointment {font-size: 35px!important;}
+}
+/*custom css ends*/

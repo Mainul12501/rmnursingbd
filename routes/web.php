@@ -16,10 +16,10 @@ use App\Http\Controllers\Frontend\PageViewController;
 Route::get('/',[PageViewController::class,'home'])->name('home');
 Route::get('/contact-us',[PageViewController::class,'contactUs'])->name('contact-us');
 Route::get('/service-categories',[PageViewController::class,'serviceCategories'])->name('service-categories');
-Route::get('/news',[PageViewController::class,'newsEvents'])->name('news-events');
+Route::get('/news-event',[PageViewController::class,'newsEvents'])->name('news-event-category');
 Route::get('/service/{companyServiceSlug}',[PageViewController::class,'serviceDetails'])->name('service-details');
 Route::get('/news/{newsEventSlug}',[PageViewController::class,'newsEventDetails'])->name('news-event-details');
-Route::get('/page/{pageSlug}',[PageViewController::class,'pageView'])->name('page-slug');
+Route::get('/page/{pageSlug}',[PageViewController::class,'pageView'])->name('page-details');
 
 Route::middleware([
     'auth:sanctum',

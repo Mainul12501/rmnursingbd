@@ -52,14 +52,14 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-12 mb-3">
-                                    <label for="banner" class="form-label">Banner Image</label>
-                                    <input type="file" class="form-control" id="banner" name="banner" accept=".jpg,.jpeg,.png,.webp,.svg">
-                                    <div class="invalid-feedback" id="error-banner"></div>
-                                    <img id="banner-preview" class="image-preview image-preview-lg mt-2 {{ empty($siteSetting?->banner) ? 'd-none' : '' }}" src="{{ !empty($siteSetting?->banner) ? asset($siteSetting->banner) : '' }}" alt="Banner preview">
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-lg-12 mb-3">--}}
+{{--                                    <label for="banner" class="form-label">Banner Image</label>--}}
+{{--                                    <input type="file" class="form-control" id="banner" name="banner" accept=".jpg,.jpeg,.png,.webp,.svg">--}}
+{{--                                    <div class="invalid-feedback" id="error-banner"></div>--}}
+{{--                                    <img id="banner-preview" class="image-preview image-preview-lg mt-2 {{ empty($siteSetting?->banner) ? 'd-none' : '' }}" src="{{ !empty($siteSetting?->banner) ? asset($siteSetting->banner) : '' }}" alt="Banner preview">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
                             <div class="row">
                                 <div class="col-lg-6 mb-3">
@@ -123,6 +123,29 @@
                                     <label for="office_email" class="form-label">Office Email</label>
                                     <input type="email" class="form-control" id="office_email" name="office_email" placeholder="Enter office email" value="{{ old('office_email', $siteSetting->office_email ?? '') }}">
                                     <div class="invalid-feedback" id="error-office_email"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mt-2">
+                                    <label for="fb">Facebook</label>
+                                    <input type="text" class="form-control" name="fb" value="{{ old('fb', $siteSetting->office_mobile ?? '') }}" placeholder="Facebook Profile Link">
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <label for="fb">Linkedin</label>
+                                    <input type="text" class="form-control" name="linkedin" value="{{ old('linkedin', $siteSetting->linkedin ?? '') }}" placeholder="Linkedin Profile Link">
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <label for="fb">Whatsapp</label>
+                                    <input type="text" class="form-control" name="whatsapp" value="{{ old('whatsapp', $siteSetting->whatsapp ?? '') }}" placeholder="Whatsapp Number">
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <label for="fb">X</label>
+                                    <input type="text" class="form-control" name="x" value="{{ old('x', $siteSetting->x ?? '') }}" placeholder="X Profile Link">
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <label for="fb">Instagram</label>
+                                    <input type="text" class="form-control" name="insta" value="{{ old('insta', $siteSetting->insta ?? '') }}" placeholder="Instagram Profile Link">
                                 </div>
                             </div>
 

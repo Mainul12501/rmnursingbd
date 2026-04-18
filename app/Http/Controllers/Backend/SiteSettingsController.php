@@ -128,6 +128,11 @@ class SiteSettingsController extends Controller
             'office_mobile' => ['nullable', 'string', 'max:14', 'regex:/^(?:\+?880|0)1[3-9]\d{8}$/'],
             'office_email' => ['nullable', 'email', 'max:255'],
             'office_address' => ['nullable', 'string', 'max:255'],
+            'linkedin' => ['nullable', 'string', 'max:255'],
+            'fb' => ['nullable', 'string', 'max:255'],
+            'whatsapp' => ['nullable', 'string', 'max:255'],
+            'insta' => ['nullable', 'string', 'max:255'],
+            'x' => ['nullable', 'string', 'max:255'],
             'banner' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,svg', 'max:8192'],
         ], $this->validationMessages());
     }

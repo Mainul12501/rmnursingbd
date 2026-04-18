@@ -28,6 +28,11 @@ return new class extends Migration {
             $table->string('office_email')->nullable();
             $table->string('office_address')->nullable();
             $table->text('banner')->nullable();
+            $table->text('fb')->nullable();
+            $table->text('x')->nullable();
+            $table->text('whatsapp')->nullable();
+            $table->text('insta')->nullable();
+            $table->text('linkedin')->nullable();
 
 
 
