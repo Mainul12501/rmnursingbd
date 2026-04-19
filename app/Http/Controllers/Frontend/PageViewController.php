@@ -42,11 +42,17 @@ class PageViewController extends Controller
     }
     public function newsEvents(Request $request)
     {
-        return view('frontend.news-events.news-category', ['newsEvents' => NewsEvent::where('status', 1)->latest()->get()]);
+        return view('frontend.news-events.news-category', [
+            'newsEvents'    => NewsEvent::where('status', 1)->latest()->get(),
+            'services'      => CompanyService::latest()->get(),
+        ]);
     }
     public function newsEventDetails(Request $request, $slug)
     {
-        return view('frontend.news-events.news-details', ['newsEvent' => NewsEvent::where('slug', $slug)->first()]);
+        return view('frontend.news-events.news-details', [
+            'newsEvent' => NewsEvent::where('slug', $slug)->first(),
+            'services'      => CompanyService::latest()->get(),
+        ]);
     }
 
     public function newAppointment(Request $request)
