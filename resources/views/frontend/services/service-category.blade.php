@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'News Category')
+@section('title', 'Our Services')
 
 @section('body')
     <section class="py-5">

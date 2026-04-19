@@ -16,8 +16,8 @@
                         <h1>HOME<br>CAREGIVER<br>SERVICES</h1>
                         <p>We provide professional, reliable, and compassionate home healthcare services right at your doorstep in Dhaka.</p>
                         <div class="hero-buttons">
-                            <a href="#contact" class="btn btn-hero-green">Contact Us</a>
-                            <a href="#services" class="btn btn-hero-outline">Our Services</a>
+                            <a href="{{ route('contact-us') }}" class="btn btn-hero-green">Contact Us</a>
+                            <a href="{{ route('service-categories') }}" class="btn btn-hero-outline">Our Services</a>
                         </div>
                     </div>
                 </div>
@@ -94,78 +94,81 @@
                 <p class="section-desc">We provide top-quality home healthcare services across Dhaka</p>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=250&fit=crop" alt="Nursing Service">
-                        </div>
-                        <div class="service-body">
-                            <h3>Home Care Nursing Services</h3>
-                            <p>Professional registered nurses providing skilled nursing care at your home for post-surgery recovery and chronic illness management.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=250&fit=crop" alt="Elderly Care">
-                        </div>
-                        <div class="service-body">
-                            <h3>Elderly Home Care Services</h3>
-                            <p>Dedicated caregivers for elderly family members providing daily assistance, medication management, and companionship at home.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                @foreach($services as $service)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-img">
+                                <img src="{{ asset($service->page_main_image) }}" alt="Nursing Service">
+                            </div>
+                            <div class="service-body">
+                                <h3>{{ $service->name ?? 'Service Name' }}</h3>
+                                <p>{{ str()->words($service->page_content, 30, '...') }}</p>
+                                <a href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1b89?w=400&h=250&fit=crop" alt="Caregiver Service">
-                        </div>
-                        <div class="service-body">
-                            <h3>Caregiver Home Services</h3>
-                            <p>Trained and compassionate caregivers to assist patients with daily living activities, personal hygiene, and mobility support.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=250&fit=crop" alt="Patient Care">
-                        </div>
-                        <div class="service-body">
-                            <h3>Patient Care Attendant</h3>
-                            <p>Experienced patient care attendants providing round-the-clock support for bedridden and critically ill patients.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1583912267550-d6c2ac3abe3f?w=400&h=250&fit=crop" alt="Medical Equipment">
-                        </div>
-                        <div class="service-body">
-                            <h3>Medical Equipment Sales & Rental</h3>
-                            <p>Hospital beds, wheelchairs, oxygen concentrators, and other essential medical equipment available for sale and rental.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-img">
-                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=250&fit=crop" alt="Physiotherapy">
-                        </div>
-                        <div class="service-body">
-                            <h3>Physiotherapy Home Services</h3>
-                            <p>Licensed physiotherapists providing rehabilitation exercises, pain management, and mobility improvement at your home.</p>
-                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="service-card">--}}
+{{--                        <div class="service-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=250&fit=crop" alt="Elderly Care">--}}
+{{--                        </div>--}}
+{{--                        <div class="service-body">--}}
+{{--                            <h3>Elderly Home Care Services</h3>--}}
+{{--                            <p>Dedicated caregivers for elderly family members providing daily assistance, medication management, and companionship at home.</p>--}}
+{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="service-card">--}}
+{{--                        <div class="service-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1b89?w=400&h=250&fit=crop" alt="Caregiver Service">--}}
+{{--                        </div>--}}
+{{--                        <div class="service-body">--}}
+{{--                            <h3>Caregiver Home Services</h3>--}}
+{{--                            <p>Trained and compassionate caregivers to assist patients with daily living activities, personal hygiene, and mobility support.</p>--}}
+{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="service-card">--}}
+{{--                        <div class="service-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=250&fit=crop" alt="Patient Care">--}}
+{{--                        </div>--}}
+{{--                        <div class="service-body">--}}
+{{--                            <h3>Patient Care Attendant</h3>--}}
+{{--                            <p>Experienced patient care attendants providing round-the-clock support for bedridden and critically ill patients.</p>--}}
+{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="service-card">--}}
+{{--                        <div class="service-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1583912267550-d6c2ac3abe3f?w=400&h=250&fit=crop" alt="Medical Equipment">--}}
+{{--                        </div>--}}
+{{--                        <div class="service-body">--}}
+{{--                            <h3>Medical Equipment Sales & Rental</h3>--}}
+{{--                            <p>Hospital beds, wheelchairs, oxygen concentrators, and other essential medical equipment available for sale and rental.</p>--}}
+{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="service-card">--}}
+{{--                        <div class="service-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=250&fit=crop" alt="Physiotherapy">--}}
+{{--                        </div>--}}
+{{--                        <div class="service-body">--}}
+{{--                            <h3>Physiotherapy Home Services</h3>--}}
+{{--                            <p>Licensed physiotherapists providing rehabilitation exercises, pain management, and mobility improvement at your home.</p>--}}
+{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>
@@ -358,45 +361,48 @@
                 <p class="section-desc">Stay updated with the latest health tips and news</p>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-img">
-                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=220&fit=crop" alt="News">
-                            <span class="news-date">25 Mar</span>
-                        </div>
-                        <div class="news-body">
-                            <h3><a href="#">Home Care Nursing Services in Dhaka - Complete Guide 2025</a></h3>
-                            <p>Everything you need to know about hiring professional nursing services for home care in Dhaka...</p>
-                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-img">
-                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=220&fit=crop" alt="News">
-                            <span class="news-date">18 Feb</span>
-                        </div>
-                        <div class="news-body">
-                            <h3><a href="#">Elderly Care Tips: How to Care for Aging Parents at Home</a></h3>
-                            <p>Practical tips and advice for families caring for elderly parents at home with professional support...</p>
-                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                @foreach($newsEvents as $newsEvent)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="news-card">
+                            <div class="news-img">
+                                <img src="{{ asset($newsEvent->main_image) }}" alt="News" class="">
+                                <span class="news-date">{{ $newsEvent->created_at->format('D M') }}</span>
+                            </div>
+                            <div class="news-body">
+                                <h3><a href="#">{{ $newsEvent->main_title ?? '' }}</a></h3>
+                                <p>{{ str()->words($newsEvent->main_content, 30, '...') }}</p>
+                                <a href="{{ route('news-event-details', ['newsEventSlug' => $newsEvent->slug]) }}" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-img">
-                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=220&fit=crop" alt="News">
-                            <span class="news-date">05 Jan</span>
-                        </div>
-                        <div class="news-body">
-                            <h3><a href="#">Oxygen Cylinder Services Now Available Across All Dhaka Areas</a></h3>
-                            <p>We have expanded our oxygen cylinder delivery and rental services to cover all major areas of Dhaka...</p>
-                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="news-card">--}}
+{{--                        <div class="news-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=220&fit=crop" alt="News">--}}
+{{--                            <span class="news-date">18 Feb</span>--}}
+{{--                        </div>--}}
+{{--                        <div class="news-body">--}}
+{{--                            <h3><a href="#">Elderly Care Tips: How to Care for Aging Parents at Home</a></h3>--}}
+{{--                            <p>Practical tips and advice for families caring for elderly parents at home with professional support...</p>--}}
+{{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6">--}}
+{{--                    <div class="news-card">--}}
+{{--                        <div class="news-img">--}}
+{{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=220&fit=crop" alt="News">--}}
+{{--                            <span class="news-date">05 Jan</span>--}}
+{{--                        </div>--}}
+{{--                        <div class="news-body">--}}
+{{--                            <h3><a href="#">Oxygen Cylinder Services Now Available Across All Dhaka Areas</a></h3>--}}
+{{--                            <p>We have expanded our oxygen cylinder delivery and rental services to cover all major areas of Dhaka...</p>--}}
+{{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>
@@ -404,35 +410,56 @@
     <!-- ====== CONTACT / MESSAGE FORM SECTION ====== -->
     <section id="contact" class="contact-section">
         <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success mb-4" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger mb-4" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="row g-5">
                 <div class="col-lg-7">
                     <div class="contact-form-box">
                         <h2>Feel Free to Send Us a Message</h2>
-                        <form class="contact-form">
+                        <form class="contact-form" method="post" action="{{ route('new-appointment') }}" novalidate>
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Your Name">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Your Name" value="{{ old('name') }}" data-label="Name" required>
+                                    <div class="invalid-feedback">@error('name') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" placeholder="Your Email">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Your Email" value="{{ old('email') }}" data-label="Email address" required>
+                                    <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="tel" class="form-control" placeholder="Phone Number">
+                                    <input type="tel" class="form-control @error('mobile') is-invalid @enderror" name="mobile" placeholder="Phone Number" value="{{ old('mobile') }}" data-label="Phone number" required>
+                                    <div class="invalid-feedback">@error('mobile') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select">
-                                        <option selected disabled>Select Service</option>
-                                        <option>Home Care Nursing</option>
-                                        <option>Elderly Home Care</option>
-                                        <option>Caregiver Services</option>
-                                        <option>Patient Care Attendant</option>
-                                        <option>Medical Equipment</option>
-                                        <option>Oxygen Cylinder</option>
-                                        <option>Physiotherapy</option>
-                                    </select>
+                                    <input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" placeholder="Subject" value="{{ old('subject') }}" data-label="Subject" required>
+                                    <div class="invalid-feedback">@error('subject') {{ $message }} @enderror</div>
                                 </div>
+{{--                                <div class="col-md-6">--}}
+{{--                                    <select class="form-select">--}}
+{{--                                        <option selected disabled>Select Service</option>--}}
+{{--                                        <option>Home Care Nursing</option>--}}
+{{--                                        <option>Elderly Home Care</option>--}}
+{{--                                        <option>Caregiver Services</option>--}}
+{{--                                        <option>Patient Care Attendant</option>--}}
+{{--                                        <option>Medical Equipment</option>--}}
+{{--                                        <option>Oxygen Cylinder</option>--}}
+{{--                                        <option>Physiotherapy</option>--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
                                 <div class="col-12">
-                                    <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                                    <textarea class="form-control @error('message') is-invalid @enderror" name="message" rows="5" placeholder="Your Message" data-label="Message">{{ old('message') }}</textarea>
+                                    <div class="invalid-feedback">@error('message') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-submit">Send Message</button>

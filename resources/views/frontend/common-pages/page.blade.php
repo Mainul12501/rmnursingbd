@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'page title')
+@section('title', $page->page_title ?? 'page title')
 
 @section('body')
     <section class="py-5">
@@ -7,20 +7,18 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="card card-body border-0">
-                        <div class="main-img-div">
-                            <img src="https://static.vecteezy.com/system/resources/thumbnails/049/855/347/small/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg" alt="" class="img-fluid w-100">
-                        </div>
+                        @if(isset($page->main_image))
+                            <div class="main-img-div">
+                                <img src="{{ asset($page->main_image) }}" alt="" class="img-fluid w-100">
+                            </div>
+                        @endif
+
                         <div class="content-div">
                             <div>
-                                <h2>heading heading heading heading heading </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, nulla, officiis! Ad nemo odio omnis sapiente veniam. Beatae ipsa iste magnam minus nihil, officia perferendis, quas qui quod ratione vitae!</p>
+                                <h2>{{ $page->page_title }} </h2>
+                                <div>
+                                    {!! $page->page_content !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -31,10 +29,13 @@
                     </div>
                     <div>
                         <nav class="nav flex-column">
-                            <a class="nav-link active" aria-current="page" href="#">Active</a>
-                            <a class="nav-link" href="#">Link</a>
-                            <a class="nav-link" href="#">Link</a>
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            @foreach($services as $service)
+                                <a class="nav-link" href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}">{{ $service->name }}</a>
+                            @endforeach
+
+{{--                            <a class="nav-link" href="#">Link</a>--}}
+{{--                            <a class="nav-link" href="#">Link</a>--}}
+{{--                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>--}}
                         </nav>
                     </div>
                 </div>

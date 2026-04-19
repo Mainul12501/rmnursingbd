@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\PageViewController;
 
 Route::get('/',[PageViewController::class,'home'])->name('home');
 Route::get('/contact-us',[PageViewController::class,'contactUs'])->name('contact-us');
+Route::post('/new-appointment',[PageViewController::class,'newAppointment'])->name('new-appointment');
 Route::get('/service-categories',[PageViewController::class,'serviceCategories'])->name('service-categories');
 Route::get('/news-event',[PageViewController::class,'newsEvents'])->name('news-event-category');
 Route::get('/service/{companyServiceSlug}',[PageViewController::class,'serviceDetails'])->name('service-details');
@@ -37,6 +38,7 @@ Route::middleware([
         'news-events'       => NewsEventController::class,
         'company-services'  => CompanyServiceController::class,
         'pages'             => PageController::class,
+        'appointments'      => \App\Http\Controllers\Backend\AppointmentController::class,
     ]);
     Route::post('site-settings/theme', [SiteSettingsController::class, 'saveTheme'])->name('site-settings.theme');
 

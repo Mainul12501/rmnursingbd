@@ -50,18 +50,90 @@ $(document).ready(function () {
     $(window).on('scroll', revealOnScroll);
     revealOnScroll();
 
-    // Contact form
-    $('.contact-form').on('submit', function (e) {
-        e.preventDefault();
-        var btn = $(this).find('.btn-submit');
-        var orig = btn.html();
-        btn.html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...').prop('disabled', true);
-        setTimeout(function () {
-            btn.html('<i class="fas fa-check me-2"></i>Sent!').css('background', '#28a745');
-            setTimeout(function () {
-                btn.html(orig).css('background', '').prop('disabled', false);
-                $('.contact-form')[0].reset();
-            }, 2500);
-        }, 1500);
+    // Contact form validation
+    function setFieldError($field, message) {
+        $field.addClass('is-invalid');
+        $field.siblings('.invalid-feedback').first().text(message);
+    }
+
+    function clearFieldError($field) {
+        $field.removeClass('is-invalid');
+        $field.siblings('.invalid-feedback').first().text('');
+    }
+
+    function validateContactField($field) {
+        var name = $field.attr('name');
+        var value = ($field.val() || '').trim();
+        var digitsOnlyValue = value.replace(/\D/g, '');
+
+        clearFieldError($field);
+
+        if ($field.prop('required') && !value) {
+            setFieldError($field, ($field.data('label') || 'This field') + ' is required.');
+            return false;
+        }
+
+        if (name === 'name' && value && value.length < 2) {
+            setFieldError($field, 'Please enter at least 2 characters for your name.');
+            return false;
+        }
+
+        if (name === 'email' && value) {
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(value)) {
+                setFieldError($field, 'Please enter a valid email address.');
+                return false;
+            }
+        }
+
+        if (name === 'mobile' && value) {
+            if (digitsOnlyValue.length < 10 || digitsOnlyValue.length > 15) {
+                setFieldError($field, 'Please enter a valid phone number.');
+                return false;
+            }
+        }
+
+        if (name === 'subject' && value && value.length < 3) {
+            setFieldError($field, 'Subject must be at least 3 characters long.');
+            return false;
+        }
+
+        if (name === 'message' && value && value.length < 10) {
+            setFieldError($field, 'Message should be at least 10 characters long.');
+            return false;
+        }
+
+        return true;
+    }
+
+    $('.contact-form').each(function () {
+        var $form = $(this);
+
+        $form.find('input, textarea, select').on('input blur', function () {
+            validateContactField($(this));
+        });
+
+        $form.on('submit', function (e) {
+            var isValid = true;
+            var $fields = $form.find('input, textarea, select');
+
+            $fields.each(function () {
+                if (!validateContactField($(this))) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                var $firstInvalidField = $form.find('.is-invalid').first();
+                if ($firstInvalidField.length) {
+                    $firstInvalidField.trigger('focus');
+                }
+                return;
+            }
+
+            var $btn = $form.find('.btn-submit');
+            $btn.html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...').prop('disabled', true);
+        });
     });
 });
