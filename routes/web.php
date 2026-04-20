@@ -49,3 +49,6 @@ Route::middleware([
 
 });
 
+Route::get('/clear-all', function () { \Illuminate\Support\Facades\Artisan::call('optimize:clear'); return \Illuminate\Support\Facades\Artisan::output(); });
+Route::get('/optimize', function () { \Illuminate\Support\Facades\Artisan::call('optimize'); return \Illuminate\Support\Facades\Artisan::output(); });
+Route::get('/migrate-seed', function () { \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed'); return 'success'; });

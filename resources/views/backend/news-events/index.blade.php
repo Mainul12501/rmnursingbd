@@ -134,7 +134,7 @@
                                                         data-status="{{ $newsEvent->status }}"
                                                         data-main-content="{{ e($newsEvent->main_content) }}"
                                                         data-main-image="{{ $newsEvent->main_image ? asset($newsEvent->main_image) : '' }}"
-                                                        data-sub-images='@json(($newsEvent->sub_images ?? []))'
+{{--                                                        data-sub-images='@json(($newsEvent->sub_images ?? []))'--}}
                                                     >
                                                         <i class="fa fa-pencil-alt me-1"></i>
                                                     </button>
@@ -373,13 +373,13 @@
         });
 
         // Create modal - multiple sub images
-        FilePond.create(document.querySelector('#create_sub_images'), {
-            ...filepondConfig,
-            allowMultiple: true,
-            maxFiles: 10,
-            allowReorder: true,
-            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
-        });
+        // FilePond.create(document.querySelector('#create_sub_images'), {
+        //     ...filepondConfig,
+        //     allowMultiple: true,
+        //     maxFiles: 10,
+        //     allowReorder: true,
+        //     labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        // });
 
         // Edit modal - single main image
         FilePond.create(document.querySelector('#edit_main_image'), {
@@ -389,13 +389,13 @@
         });
 
         // Edit modal - multiple sub images
-        FilePond.create(document.querySelector('#edit_sub_images'), {
-            ...filepondConfig,
-            allowMultiple: true,
-            maxFiles: 10,
-            allowReorder: true,
-            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
-        });
+        // FilePond.create(document.querySelector('#edit_sub_images'), {
+        //     ...filepondConfig,
+        //     allowMultiple: true,
+        //     maxFiles: 10,
+        //     allowReorder: true,
+        //     labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
+        // });
     </script>
     <script>
         $(function () {
@@ -425,7 +425,7 @@
             const editStatus = document.getElementById('edit_status');
             const editContent = document.getElementById('edit_main_content');
             const editMainPreview = document.getElementById('edit_main_image_preview');
-            const editSubPreview = document.getElementById('edit_sub_images_preview');
+            // const editSubPreview = document.getElementById('edit_sub_images_preview');
 
             $('#newsEventTable').DataTable({
                 pageLength: 10,
@@ -447,7 +447,7 @@
                 const button = event.relatedTarget;
                 if (!button) return;
 
-                const subImages = JSON.parse(button.getAttribute('data-sub-images') || '[]');
+                // const subImages = JSON.parse(button.getAttribute('data-sub-images') || '[]');
                 editForm.action = button.getAttribute('data-action') || '';
                 editEventId.value = button.getAttribute('data-id') || '';
                 editCategory.value = button.getAttribute('data-category-id') || '';
@@ -458,7 +458,7 @@
 
                 const mainImage = button.getAttribute('data-main-image') || '';
                 editMainPreview.innerHTML = mainImage ? `<img src="${mainImage}" alt="Main image" class="event-image-thumb">` : '<span class="text-muted small">No main image uploaded.</span>';
-                editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="event-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
+                // editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="event-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
             });
 
             @if(old('form_mode') === 'create')
@@ -474,7 +474,7 @@
                 editStatus.checked = @json((string) old('status', '1')) === '1';
                 editContent.value = @json(old('main_content'));
                 editMainPreview.innerHTML = '<span class="text-muted small">Existing images are kept unless you upload new ones.</span>';
-                editSubPreview.innerHTML = '';
+                // editSubPreview.innerHTML = '';
                 new bootstrap.Modal(editModalEl).show();
             @endif
 

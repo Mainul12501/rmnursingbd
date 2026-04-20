@@ -138,7 +138,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header"><h5 class="modal-title" id="createPageModalLabel">Create Page</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <form action="{{ route('pages.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('pages.store') }}" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     <input type="hidden" name="form_mode" value="create">
                     <div class="modal-body">
@@ -159,11 +159,11 @@
                                 <input type="hidden" id="create_slug_hidden" name="slug" value="{{ old('form_mode') === 'create' ? old('slug') : '' }}">
                                 @if(old('form_mode') === 'create') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-4">
-                                <label for="create_order" class="form-label">Order</label>
-                                <input type="number" id="create_order" name="order" class="form-control @if(old('form_mode') === 'create') @error('order') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('order', 1) : 1 }}" min="0" max="127">
-                                @if(old('form_mode') === 'create') @error('order') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-4">--}}
+{{--                                <label for="create_order" class="form-label">Order</label>--}}
+{{--                                <input type="number" id="create_order" name="order" class="form-control @if(old('form_mode') === 'create') @error('order') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('order', 1) : 1 }}" min="0" max="127">--}}
+{{--                                @if(old('form_mode') === 'create') @error('order') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-md-4">
                                 <label class="form-label d-block">Status <span class="text-danger">*</span></label>
                                 <input type="hidden" name="status" value="0">
@@ -178,11 +178,11 @@
                                 <input type="file" id="create_main_image" name="main_image" class="form-control @if(old('form_mode') === 'create') @error('main_image') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp">
                                 @if(old('form_mode') === 'create') @error('main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
-                                <label for="create_sub_images" class="form-label">Sub Images</label>
-                                <input type="file" id="create_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'create') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>
-                                @if(old('form_mode') === 'create') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="create_sub_images" class="form-label">Sub Images</label>--}}
+{{--                                <input type="file" id="create_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'create') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>--}}
+{{--                                @if(old('form_mode') === 'create') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="create_page_content" class="form-label">Page Content</label>
                                 <textarea id="create_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'create') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'create' ? old('page_content') : '' }}</textarea>
@@ -204,7 +204,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header"><h5 class="modal-title" id="editPageModalLabel">Edit Page</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <form id="editPageForm" method="POST" enctype="multipart/form-data">
+                <form id="editPageForm" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="form_mode" value="edit">
@@ -227,11 +227,11 @@
                                 <input type="hidden" id="edit_slug_hidden" name="slug" value="{{ old('form_mode') === 'edit' ? old('slug') : '' }}">
                                 @if(old('form_mode') === 'edit') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-4">
-                                <label for="edit_order" class="form-label">Order</label>
-                                <input type="number" id="edit_order" name="order" class="form-control @if(old('form_mode') === 'edit') @error('order') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('order', 1) : 1 }}" min="0" max="127">
-                                @if(old('form_mode') === 'edit') @error('order') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-4">--}}
+{{--                                <label for="edit_order" class="form-label">Order</label>--}}
+{{--                                <input type="number" id="edit_order" name="order" class="form-control @if(old('form_mode') === 'edit') @error('order') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('order', 1) : 1 }}" min="0" max="127">--}}
+{{--                                @if(old('form_mode') === 'edit') @error('order') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-md-4">
                                 <label class="form-label d-block">Status <span class="text-danger">*</span></label>
                                 <input type="hidden" name="status" value="0">
@@ -248,13 +248,13 @@
                                 @if(old('form_mode') === 'edit') @error('main_image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                                 <div id="edit_main_image_preview" class="mt-2"></div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="edit_sub_images" class="form-label">Sub Images</label>
-                                <input type="file" id="edit_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'edit') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>
-                                <div class="form-text">Uploading new sub images will replace the existing set.</div>
-                                @if(old('form_mode') === 'edit') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                                <div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div>
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="edit_sub_images" class="form-label">Sub Images</label>--}}
+{{--                                <input type="file" id="edit_sub_images" name="sub_images[]" class="form-control @if(old('form_mode') === 'edit') @error('sub_images.*') is-invalid @enderror @endif" accept=".jpg,.jpeg,.png,.webp" multiple>--}}
+{{--                                <div class="form-text">Uploading new sub images will replace the existing set.</div>--}}
+{{--                                @if(old('form_mode') === 'edit') @error('sub_images.*') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                                <div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div>--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="edit_page_content" class="form-label">Page Content</label>
                                 <textarea id="edit_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'edit') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'edit' ? old('page_content') : '' }}</textarea>
@@ -321,10 +321,10 @@
             const editPageId = document.getElementById('edit_page_id');
             const editPageTitle = document.getElementById('edit_page_title');
             const editMenuTitle = document.getElementById('edit_menu_title');
-            const editOrder = document.getElementById('edit_order');
+            // const editOrder = document.getElementById('edit_order');
             const editStatus = document.getElementById('edit_status');
             const editMainPreview = document.getElementById('edit_main_image_preview');
-            const editSubPreview = document.getElementById('edit_sub_images_preview');
+            // const editSubPreview = document.getElementById('edit_sub_images_preview');
 
             initPageEditors();
 
@@ -352,13 +352,13 @@
                 editPageId.value = button.getAttribute('data-id') || '';
                 editPageTitle.value = button.getAttribute('data-page-title') || '';
                 editMenuTitle.value = button.getAttribute('data-menu-title') || '';
-                editOrder.value = button.getAttribute('data-order') || '1';
+                // editOrder.value = button.getAttribute('data-order') || '1';
                 editStatus.checked = (button.getAttribute('data-status') || '0') === '1';
                 syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
                 if (editPageEditor) { editPageEditor.setData(button.getAttribute('data-page-content') || ''); }
                 const mainImage = button.getAttribute('data-main-image') || '';
                 editMainPreview.innerHTML = mainImage ? `<img src="${mainImage}" alt="Main image" class="page-image-thumb">` : '<span class="text-muted small">No main image uploaded.</span>';
-                editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="page-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
+                // editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="page-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
             });
 
             @if(old('form_mode') === 'create')
@@ -370,12 +370,12 @@
                 editPageId.value = @json(old('page_id'));
                 editPageTitle.value = @json(old('page_title'));
                 editMenuTitle.value = @json(old('menu_title'));
-                editOrder.value = @json(old('order', 1));
+                {{--editOrder.value = @json(old('order', 1));--}}
                 editStatus.checked = @json((string) old('status', '1')) === '1';
                 syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
                 setTimeout(function () { if (editPageEditor) { editPageEditor.setData(@json(old('page_content'))); } }, 300);
                 editMainPreview.innerHTML = '<span class="text-muted small">Existing images are kept unless you upload new ones.</span>';
-                editSubPreview.innerHTML = '';
+                // editSubPreview.innerHTML = '';
                 new bootstrap.Modal(editModalEl).show();
             @endif
 

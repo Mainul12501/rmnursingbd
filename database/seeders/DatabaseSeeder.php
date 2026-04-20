@@ -25,10 +25,11 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             UserRoleTableSeeder::class,
 
-            CompanyServiceSeeder::class,
-            NewsEventCategorySeeder::class,
-            NewsEventSeeder::class,
-            PageSeeder::class,
+//            CompanyServiceSeeder::class,
+//            NewsEventCategorySeeder::class,
+//            NewsEventSeeder::class,
+//            PageSeeder::class,
+//            AppointmentRequestSeeder::class,
         ]);
     }
 }

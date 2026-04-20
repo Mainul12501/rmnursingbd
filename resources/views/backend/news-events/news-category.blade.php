@@ -56,7 +56,7 @@
                     <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
                         <div>
                             <h5 class="card-title mb-1">Category List</h5>
-                            <p class="text-muted mb-0">All records are managed with Bootstrap 5 modals.</p>
+{{--                            <p class="text-muted mb-0">All records are managed with Bootstrap 5 modals.</p>--}}
                         </div>
                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
                             {{ $newsCategories->count() }} records

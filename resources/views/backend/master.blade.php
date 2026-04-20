@@ -40,7 +40,7 @@
 {{--@endphp--}}
 
 <!DOCTYPE html>
-<html lang="en" dir="{{ $direction }}" data-nav-layout="{{ $navigationStyle }}" @if($navigationStyle === 'horizontal') data-nav-style="{{ $navStyleAttr }}" @else data-vertical-style="{{ $verticalStyleAttr }}" @endif data-page-style="{{ $pageStyles }}" data-width="{{ $layoutWidth }}" data-menu-position="{{ $menuPositions }}" data-header-position="{{ $headerPositions }}" data-theme-mode="{{ $themeStyle }}" data-header-styles="{{ $headerColors }}" data-menu-styles="{{ $menuColors }}" data-toggled="close" @if($menuBgImg) data-bg-img="{{ $menuBgImg }}" @endif loader="{{ $pageLoader }}">
+<html lang="en" dir="{{ $direction }}" data-nav-layout="{{ $navigationStyle }}" @if($navigationStyle === 'horizontal') data-nav-style="{{ $navStyleAttr }}" @else data-vertical-style="{{ $verticalStyleAttr }}" @endif  data-page-style="{{ $pageStyles }}" data-width="{{ $layoutWidth }}" data-menu-position="{{ $menuPositions }}" data-header-position="{{ $headerPositions }}" data-theme-mode="{{ $themeStyle }}" data-header-styles="{{ $headerColors }}" data-menu-styles="{{ $menuColors }}" data-toggled="close" @if($menuBgImg) data-bg-img="{{ $menuBgImg }}" @endif loader="{{ $pageLoader }}">
 
 <head>
 
