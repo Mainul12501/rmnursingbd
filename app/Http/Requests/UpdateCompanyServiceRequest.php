@@ -43,8 +43,6 @@ class UpdateCompanyServiceRequest extends FormRequest
             'page_sub_images' => ['nullable', 'array'],
             'page_sub_images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('company_services', 'slug')->ignore($serviceId)],
-            'form_mode' => ['nullable', 'string'],
-            'service_id' => ['nullable', 'integer'],
         ];
     }
 }

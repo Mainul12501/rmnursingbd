@@ -50,6 +50,12 @@ class SiteSetting extends Model
         'theme_bg_color',
         'theme_bg_color_code',
         'menu_bg_img',
+
+        'fb',
+        'x',
+        'insta',
+        'whatsapp',
+        'linkedin',
     ];
 
     protected $searchableFields = ['*'];

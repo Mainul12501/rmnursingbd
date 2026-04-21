@@ -154,7 +154,7 @@
                     <h5 class="modal-title" id="createCategoryModalLabel">Create News Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('news-categories.store') }}" method="POST">
+                <form action="{{ route('news-categories.store') }}" method="POST" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     <input type="hidden" name="form_mode" value="create">
                     <div class="modal-body">
@@ -235,7 +235,7 @@
                     <h5 class="modal-title" id="editCategoryModalLabel">Edit News Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editCategoryForm" method="POST">
+                <form id="editCategoryForm" method="POST" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="form_mode" value="edit">

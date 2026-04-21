@@ -41,24 +41,24 @@
                 <!-- Start::slide -->
                 <!-- User
                  menu -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-                        <span class="side-menu__label">&nbsp; User Module</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">User Module</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('roles.index') }}" class="side-menu__item">Roles</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('users.index') }}" class="side-menu__item">Users</a>
-                        </li>
-                    </ul>
-                </li>
+{{--                <li class="slide has-sub">--}}
+{{--                    <a href="javascript:void(0);" class="side-menu__item">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>--}}
+{{--                        <span class="side-menu__label">&nbsp; User Module</span>--}}
+{{--                        <i class="fe fe-chevron-right side-menu__angle"></i>--}}
+{{--                    </a>--}}
+{{--                    <ul class="slide-menu child1">--}}
+{{--                        <li class="slide side-menu__label1">--}}
+{{--                            <a href="javascript:void(0);">User Module</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="slide">--}}
+{{--                            <a href="{{ route('roles.index') }}" class="side-menu__item">Roles</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="slide">--}}
+{{--                            <a href="{{ route('users.index') }}" class="side-menu__item">Users</a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-news"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a2 2 0 0 0 2 2h8" /><path d="M8 8l4 0" /><path d="M8 12l4 0" /><path d="M8 16l4 0" /></svg>
@@ -100,6 +100,20 @@
                     <a href="{{ route('pages.index') }}" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-text"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg>
                         <span class="side-menu__label">&nbsp; Dynamic Pages</span>
+                    </a>
+                </li>
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('client-reviews.index') }}" class="side-menu__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-text"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg>
+                        <span class="side-menu__label">&nbsp; Client Reviews</span>
+                    </a>
+                </li>
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('home-sliders.index') }}" class="side-menu__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-text"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg>
+                        <span class="side-menu__label">&nbsp; Nexaa Slider</span>
                     </a>
                 </li>
                 <li class="slide">

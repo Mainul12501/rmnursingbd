@@ -33,29 +33,29 @@
             <div class="container">
                 <div class="row g-3">
                     <div class="col-lg-4 col-md-4">
-                        <div class="hero-card">
+                        <div class="hero-card" style="height: 100%">
                             <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>
                             <div>
                                 <h4>Professional Nurses</h4>
-                                <p>Certified and experienced nursing staff</p>
+                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="hero-card">
+                        <div class="hero-card" style="height: 100%">
                             <div class="hero-card-icon"><i class="fas fa-clock"></i></div>
                             <div>
                                 <h4>24/7 Available</h4>
-                                <p>Round-the-clock care and support</p>
+                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="hero-card">
+                        <div class="hero-card" style="height: 100%">
                             <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>
                             <div>
-                                <h4>Easy Booking</h4>
-                                <p>Call us anytime for quick service</p>
+                                <h4>Guaranteed Satisfaction</h4>
+                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>
                             </div>
                         </div>
                     </div>
@@ -70,16 +70,16 @@
             <div class="row align-items-center g-5">
                 <div class="col-lg-5">
                     <div class="about-logo-block">
-                        <img src="https://doctorshomecarebd.com/wp-content/uploads/2025/05/cropped-Doctors-Home-Care-Logo-1-1.png" alt="Doctors Home Care Logo" class="about-logo">
+                        <img src="{{ asset('frontend/h-banner.jpeg') }}" alt="rmnursingbd banner" class="<!--about-logo-->">
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="about-content">
                         <span class="section-subtitle">WHO WE ARE</span>
-                        <h2 class="section-title">Welcome to<br><strong>Doctors Home Care Limited</strong></h2>
-                        <p>Doctors Home Care Ltd is a leading home healthcare service provider in Dhaka, Bangladesh. We are committed to delivering compassionate, professional, and affordable medical care to patients in the comfort of their own homes.</p>
+                        <h2 class="section-title">Welcome to<br><strong>{{ $siteSetting->meta_title ?? 'RM Nursing BD' }}</strong></h2>
+                        <p>{{ $siteSetting->meta_title ?? 'RM Nursing BD' }} is a leading home healthcare service provider in Dhaka, Bangladesh. We are committed to delivering compassionate, professional, and affordable medical care to patients in the comfort of their own homes.</p>
                         <p>Our team of certified nurses, trained caregivers, and experienced physiotherapists work dedicatedly to ensure every patient receives personalized attention and quality care. We understand that healing happens best in a familiar environment surrounded by loved ones.</p>
-                        <a href="#" class="btn btn-primary-custom">Read More</a>
+                        <a href="{{ route('service-categories') }}" class="btn btn-primary-custom">Read More</a>
                     </div>
                 </div>
             </div>
@@ -97,9 +97,11 @@
                 @foreach($services as $service)
                     <div class="col-lg-4 col-md-6">
                         <div class="service-card">
-                            <div class="service-img">
-                                <img src="{{ asset($service->page_main_image) }}" alt="Nursing Service">
-                            </div>
+                            @if(isset($service->page_main_image))
+                                <div class="service-img">
+                                    <img src="{{ asset($service->page_main_image) }}" alt="Nursing Service">
+                                </div>
+                            @endif
                             <div class="service-body">
                                 <h3>{{ $service->name ?? 'Service Name' }}</h3>
                                 <p>{{ str()->words($service->page_content, 30, '...') }}</p>
@@ -182,7 +184,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
-                                What services does Doctors Home Care provide?
+                                What services does {{ $siteSetting->meta_title ?? 'RM Nursing BD' }} provide?
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
@@ -237,9 +239,9 @@
     <!-- ====== FACILITIES SECTION ====== -->
     <section id="facilities" class="facilities-section">
         <div class="container">
-            <div class="mb-4">
+            <div class="mb-4 text-center">
                 <h2 class="section-title">Our Facilities</h2>
-                <p class="section-subtitle-text">Doctors Home Care Limited</p>
+                <p class="section-subtitle-text">{{ $siteSetting->meta_title ?? 'RM Nursing BD' }}</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
@@ -309,7 +311,7 @@
                         <div class="review-stars">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
-                        <p>"The nursing care provided by Doctors Home Care was outstanding. The nurse was professional and took excellent care of my father after his surgery."</p>
+                        <p>"The nursing care provided by {{ $siteSetting->meta_title ?? 'RM Nursing BD' }} was outstanding. The nurse was professional and took excellent care of my father after his surgery."</p>
                         <div class="review-author">
                             <div class="review-avatar"><i class="fas fa-user"></i></div>
                             <div>

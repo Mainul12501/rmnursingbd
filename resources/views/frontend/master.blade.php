@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="{{ $siteSetting->meta_description ?? '' }}">
     <title>{{ $siteSetting->title ?? '' }} - Trusted Home Care Services in Dhaka | @yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset($siteSetting->favicon ?? '/frontend/favicon.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -39,7 +40,7 @@
 <!-- ====== MAIN NAVBAR ====== -->
 <nav class="navbar navbar-expand-lg sticky-top main-navbar">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset($siteSetting ? $siteSetting->menu_logo : 'https://t4.ftcdn.net/jpg/06/18/70/35/360_F_618703552_WeVTEs8XmeEb1hGiEZ5ZjJXSbx4yiiPm.jpg') }}" alt="Doctors Home Care Ltd" class="logo-img">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">

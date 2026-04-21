@@ -129,7 +129,7 @@
                             <div class="row">
                                 <div class="col-md-4 mt-2">
                                     <label for="fb">Facebook</label>
-                                    <input type="text" class="form-control" name="fb" value="{{ old('fb', $siteSetting->office_mobile ?? '') }}" placeholder="Facebook Profile Link">
+                                    <input type="text" class="form-control" name="fb" value="{{ old('fb', $siteSetting->fb ?? '') }}" placeholder="Facebook Profile Link">
                                 </div>
                                 <div class="col-md-4 mt-2">
                                     <label for="fb">Linkedin</label>

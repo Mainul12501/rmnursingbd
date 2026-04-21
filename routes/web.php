@@ -12,6 +12,8 @@ use App\Http\Controllers\Backend\NewsEvent\NewsEventController;
 use App\Http\Controllers\Backend\CompanyServiceController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Frontend\PageViewController;
+use App\Http\Controllers\Backend\ClientReviewsController;
+use App\Http\Controllers\Backend\HomeSliderController;
 
 Route::get('/',[PageViewController::class,'home'])->name('home');
 Route::get('/contact-us',[PageViewController::class,'contactUs'])->name('contact-us');
@@ -38,6 +40,8 @@ Route::middleware([
         'news-events'       => NewsEventController::class,
         'company-services'  => CompanyServiceController::class,
         'pages'             => PageController::class,
+        'client-reviews'    => ClientReviewsController::class,
+        'home-sliders'      => HomeSliderController::class,
         'appointments'      => \App\Http\Controllers\Backend\AppointmentController::class,
     ]);
     Route::post('site-settings/theme', [SiteSettingsController::class, 'saveTheme'])->name('site-settings.theme');
@@ -49,6 +53,7 @@ Route::middleware([
 
 });
 
+Route::get('/migrate-db', function () { \Mainul\CustomHelperFunctions\Helpers\CustomHelper::migrate(); return \Illuminate\Support\Facades\Artisan::output(); });
 Route::get('/clear-all', function () { \Illuminate\Support\Facades\Artisan::call('optimize:clear'); return \Illuminate\Support\Facades\Artisan::output(); });
 Route::get('/optimize', function () { \Illuminate\Support\Facades\Artisan::call('optimize'); return \Illuminate\Support\Facades\Artisan::output(); });
 Route::get('/migrate-seed', function () { \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed'); return 'success'; });

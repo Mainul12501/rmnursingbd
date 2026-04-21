@@ -24,7 +24,7 @@ class CompanyServiceController extends Controller
         //
     }
 
-    public function store(StoreCompanyServiceRequest $request): RedirectResponse
+    public function store(StoreCompanyServiceRequest $request)
     {
         $validated = $request->validated();
 
@@ -48,6 +48,10 @@ class CompanyServiceController extends Controller
 
         CompanyService::create($payload);
 
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Company service created successfully.']);
+        }
+
         return redirect()
             ->route('company-services.index')
             ->with(['message' => 'Company service created successfully.', 'alert-type' => 'success']);
@@ -63,7 +67,7 @@ class CompanyServiceController extends Controller
         return response()->json($companyService->load('createdBy:id,name'));
     }
 
-    public function update(UpdateCompanyServiceRequest $request, CompanyService $companyService): RedirectResponse
+    public function update(UpdateCompanyServiceRequest $request, CompanyService $companyService)
     {
         $validated = $request->validated();
 
@@ -87,6 +91,10 @@ class CompanyServiceController extends Controller
         }
 
         $companyService->update($payload);
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Company service updated successfully.']);
+        }
 
         return redirect()
             ->route('company-services.index')

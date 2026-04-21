@@ -47,13 +47,6 @@
                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">{{ $companyServices->count() }} records</span>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Please fix the highlighted fields and submit again.</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
-
                         @if($companyServices->isEmpty())
                             <div class="text-center py-5">
                                 <div class="text-muted mb-2"><i class="mdi mdi-database-off-outline fs-2"></i></div>
@@ -93,7 +86,7 @@
                                             <td><span class="badge {{ $service->status ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-danger-subtle text-danger border border-danger-subtle' }}">{{ $service->status ? 'Active' : 'Inactive' }}</span></td>
                                             <td class="text-end">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-primary me-2 js-edit-service" data-bs-toggle="modal" data-bs-target="#editServiceModal" data-action="{{ route('company-services.update', $service) }}" data-id="{{ $service->id }}" data-name="{{ $service->name }}" data-content-title="{{ $service->content_title }}" data-menu-type="{{ $service->service_menu_type }}" data-status="{{ $service->status }}" data-slug="{{ $service->slug }}" data-page-content="{{ e($service->page_content) }}" data-main-image="{{ $service->page_main_image ? asset($service->page_main_image) : '' }}" data-sub-images='@json(($service->page_sub_images ?? []))'><i class="fa fa-pencil-alt me-1"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-primary me-2 js-edit-service" data-bs-toggle="modal" data-bs-target="#editServiceModal" data-action="{{ route('company-services.update', $service) }}" data-id="{{ $service->id }}" data-name="{{ $service->name }}" data-content-title="{{ $service->content_title }}" data-menu-type="{{ $service->service_menu_type }}" data-status="{{ $service->status }}" data-slug="{{ $service->slug }}" data-page-content="{{ $service->page_content }}" data-main-image="{{ $service->page_main_image ? asset($service->page_main_image) : '' }}" data-sub-images='@json(($service->page_sub_images ?? []))'><i class="fa fa-pencil-alt me-1"></i></button>
                                                     <form action="{{ route('company-services.destroy', $service) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -121,17 +114,15 @@
                 <div class="modal-header"><h5 class="modal-title" id="createServiceModalLabel">Create Company Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                 <form action="{{ route('company-services.store') }}" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
-                    <input type="hidden" name="form_mode" value="create">
                     <div class="modal-body">
                         <div class="row g-3">
-                            <div class="col-md-6"><label for="create_name" class="form-label">Service Name <span class="text-danger">*</span></label><input type="text" id="create_name" name="name" class="form-control @if(old('form_mode') === 'create') @error('name') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('name') : '' }}" placeholder="Enter service name" oninput="syncCompanyServiceSlug('create_name','create_slug','create_slug_hidden')" onkeyup="syncCompanyServiceSlug('create_name','create_slug','create_slug_hidden')">@if(old('form_mode') === 'create') @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label for="create_content_title" class="form-label">Content Title</label><input type="text" id="create_content_title" name="content_title" class="form-control @if(old('form_mode') === 'create') @error('content_title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('content_title') : '' }}" placeholder="Enter content title">@if(old('form_mode') === 'create') @error('content_title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label for="create_slug" class="form-label">Slug</label><input type="text" id="create_slug" class="form-control @if(old('form_mode') === 'create') @error('slug') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('slug') : '' }}" placeholder="Slug will be generated automatically" readonly tabindex="-1"><input type="hidden" id="create_slug_hidden" name="slug" value="{{ old('form_mode') === 'create' ? old('slug') : '' }}">@if(old('form_mode') === 'create') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label for="create_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="create_service_menu_type" name="service_menu_type" class="form-select @if(old('form_mode') === 'create') @error('service_menu_type') is-invalid @enderror @endif"><option value="main" {{ old('form_mode') === 'create' ? (old('service_menu_type', 'main') === 'main' ? 'selected' : '') : 'selected' }}>Main</option><option value="sub" {{ old('form_mode') === 'create' && old('service_menu_type') === 'sub' ? 'selected' : '' }}>Sub</option><option value="both" {{ old('form_mode') === 'create' && old('service_menu_type') === 'both' ? 'selected' : '' }}>Both</option></select>@if(old('form_mode') === 'create') @error('service_menu_type') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input @if(old('form_mode') === 'create') @error('status') is-invalid @enderror @endif" type="checkbox" role="switch" id="create_status" name="status" value="1" {{ old('form_mode') === 'create' ? (old('status', 1) == 1 ? 'checked' : '') : 'checked' }}><label class="form-check-label fw-semibold" for="create_status">Active</label></div>@if(old('form_mode') === 'create') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" class="filepond-single" id="create_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp">@if(old('form_mode') === 'create') @error('page_main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif</div>
-{{--                            <div class="col-md-6"><label class="form-label">Sub Images</label><input type="file" class="filepond-multiple" id="create_page_sub_images" name="page_sub_images[]" multiple accept="image/jpeg, image/png, image/webp">@if(old('form_mode') === 'create') @error('page_sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif</div>--}}
-                            <div class="col-12"><label for="create_page_content" class="form-label">Page Content</label><textarea id="create_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'create') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'create' ? old('page_content') : '' }}</textarea>@if(old('form_mode') === 'create') @error('page_content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
+                            <div class="col-md-6"><label for="create_name" class="form-label">Service Name <span class="text-danger">*</span></label><input type="text" id="create_name" name="name" class="form-control" placeholder="Enter service name" oninput="syncCompanyServiceSlug('create_name','create_slug','create_slug_hidden')"></div>
+                            <div class="col-md-6"><label for="create_content_title" class="form-label">Content Title</label><input type="text" id="create_content_title" name="content_title" class="form-control" placeholder="Enter content title"></div>
+                            <div class="col-md-4"><label for="create_slug" class="form-label">Slug</label><input type="text" id="create_slug" class="form-control" placeholder="Auto-generated from name" readonly tabindex="-1"><input type="hidden" id="create_slug_hidden" name="slug"></div>
+                            <div class="col-md-4"><label for="create_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="create_service_menu_type" name="service_menu_type" class="form-select"><option value="main" selected>Main</option><option value="sub">Sub</option><option value="both">Both</option></select></div>
+                            <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input" type="checkbox" role="switch" id="create_status" name="status" value="1" checked><label class="form-check-label fw-semibold" for="create_status">Active</label></div></div>
+                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" id="create_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp"></div>
+                            <div class="col-12"><label for="create_page_content" class="form-label">Page Content</label><textarea id="create_page_content" name="page_content" rows="8" class="form-control" placeholder="Write the page content here..."></textarea></div>
                         </div>
                     </div>
                     <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Save Service</button></div>
@@ -147,18 +138,16 @@
                 <form id="editServiceForm" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="form_mode" value="edit">
-                    <input type="hidden" name="service_id" id="edit_service_id" value="{{ old('form_mode') === 'edit' ? old('service_id') : '' }}">
+                    <input type="hidden" name="service_id" id="edit_service_id">
                     <div class="modal-body">
                         <div class="row g-3">
-                            <div class="col-md-6"><label for="edit_name" class="form-label">Service Name <span class="text-danger">*</span></label><input type="text" id="edit_name" name="name" class="form-control @if(old('form_mode') === 'edit') @error('name') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('name') : '' }}" placeholder="Enter service name" oninput="syncCompanyServiceSlug('edit_name','edit_slug','edit_slug_hidden')" onkeyup="syncCompanyServiceSlug('edit_name','edit_slug','edit_slug_hidden')">@if(old('form_mode') === 'edit') @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label for="edit_content_title" class="form-label">Content Title</label><input type="text" id="edit_content_title" name="content_title" class="form-control @if(old('form_mode') === 'edit') @error('content_title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('content_title') : '' }}" placeholder="Enter content title">@if(old('form_mode') === 'edit') @error('content_title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label for="edit_slug" class="form-label">Slug</label><input type="text" id="edit_slug" class="form-control @if(old('form_mode') === 'edit') @error('slug') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('slug') : '' }}" placeholder="Slug will be generated automatically" readonly tabindex="-1"><input type="hidden" id="edit_slug_hidden" name="slug" value="{{ old('form_mode') === 'edit' ? old('slug') : '' }}">@if(old('form_mode') === 'edit') @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label for="edit_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="edit_service_menu_type" name="service_menu_type" class="form-select @if(old('form_mode') === 'edit') @error('service_menu_type') is-invalid @enderror @endif"><option value="main" {{ old('form_mode') === 'edit' && old('service_menu_type', 'main') === 'main' ? 'selected' : '' }}>Main</option><option value="sub" {{ old('form_mode') === 'edit' && old('service_menu_type') === 'sub' ? 'selected' : '' }}>Sub</option><option value="both" {{ old('form_mode') === 'edit' && old('service_menu_type') === 'both' ? 'selected' : '' }}>Both</option></select>@if(old('form_mode') === 'edit') @error('service_menu_type') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input @if(old('form_mode') === 'edit') @error('status') is-invalid @enderror @endif" type="checkbox" role="switch" id="edit_status" name="status" value="1" {{ old('form_mode') === 'edit' ? (old('status', 1) == 1 ? 'checked' : '') : false }}><label class="form-check-label fw-semibold" for="edit_status">Active</label></div>@if(old('form_mode') === 'edit') @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror @endif</div>
-                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" class="filepond-single" id="edit_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp"><div class="form-text">Leave empty to keep the existing main image.</div>@if(old('form_mode') === 'edit') @error('page_main_image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif<div id="edit_main_image_preview" class="mt-2"></div></div>
-{{--                            <div class="col-md-6"><label class="form-label">Sub Images</label><input type="file" class="filepond-multiple" id="edit_page_sub_images" name="page_sub_images[]" multiple accept="image/jpeg, image/png, image/webp"><div class="form-text">Uploading new sub images will replace the existing set.</div>@if(old('form_mode') === 'edit') @error('page_sub_images.*') <div class="text-danger small mt-1">{{ $message }}</div> @enderror @endif<div id="edit_sub_images_preview" class="d-flex flex-wrap gap-2 mt-2"></div></div>--}}
-                            <div class="col-12"><label for="edit_page_content" class="form-label">Page Content</label><textarea id="edit_page_content" name="page_content" rows="8" class="form-control @if(old('form_mode') === 'edit') @error('page_content') is-invalid @enderror @endif" placeholder="Write the page content here...">{{ old('form_mode') === 'edit' ? old('page_content') : '' }}</textarea>@if(old('form_mode') === 'edit') @error('page_content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif</div>
+                            <div class="col-md-6"><label for="edit_name" class="form-label">Service Name <span class="text-danger">*</span></label><input type="text" id="edit_name" name="name" class="form-control" placeholder="Enter service name" oninput="syncCompanyServiceSlug('edit_name','edit_slug','edit_slug_hidden')"></div>
+                            <div class="col-md-6"><label for="edit_content_title" class="form-label">Content Title</label><input type="text" id="edit_content_title" name="content_title" class="form-control" placeholder="Enter content title"></div>
+                            <div class="col-md-4"><label for="edit_slug" class="form-label">Slug</label><input type="text" id="edit_slug" class="form-control" placeholder="Auto-generated from name" readonly tabindex="-1"><input type="hidden" id="edit_slug_hidden" name="slug"></div>
+                            <div class="col-md-4"><label for="edit_service_menu_type" class="form-label">Menu Type <span class="text-danger">*</span></label><select id="edit_service_menu_type" name="service_menu_type" class="form-select"><option value="main">Main</option><option value="sub">Sub</option><option value="both">Both</option></select></div>
+                            <div class="col-md-4"><label class="form-label d-block">Status <span class="text-danger">*</span></label><input type="hidden" name="status" value="0"><div class="form-check form-switch form-check-lg"><input class="form-check-input" type="checkbox" role="switch" id="edit_status" name="status" value="1"><label class="form-check-label fw-semibold" for="edit_status">Active</label></div></div>
+                            <div class="col-md-6"><label class="form-label">Main Image</label><input type="file" id="edit_page_main_image" name="page_main_image" accept="image/jpeg, image/png, image/webp"><div class="form-text">Leave empty to keep the existing main image.</div><div id="edit_main_image_preview" class="mt-2"></div></div>
+                            <div class="col-12"><label for="edit_page_content" class="form-label">Page Content</label><textarea id="edit_page_content" name="page_content" rows="8" class="form-control" placeholder="Write the page content here..."></textarea></div>
                         </div>
                     </div>
                     <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Update Service</button></div>
@@ -171,7 +160,6 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond/filepond.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css') }}">
     <style>
         .form-check-lg .form-check-input { width: 2.75rem; height: 1.45rem; margin-top: 0.15rem; }
         .bg-primary-subtle { background-color: rgba(var(--primary-rgb), 0.12) !important; }
@@ -200,96 +188,125 @@
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script>
-    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
     <script>
-        // Register FilePond plugins
+        // Register FilePond plugins (no FileEncode — use storeAsFile to send real files)
         FilePond.registerPlugin(
             FilePondPluginImagePreview,
             FilePondPluginImageExifOrientation,
             FilePondPluginFileValidateSize,
-            FilePondPluginFileValidateType,
-            FilePondPluginFileEncode
+            FilePondPluginFileValidateType
         );
 
         const filepondConfig = {
             acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
             maxFileSize: '3MB',
-            labelIdle: 'Drag & Drop your image or <span class="filepond--label-action">Browse</span>',
             imagePreviewHeight: 140,
             credits: false,
+            storeAsFile: true,
         };
 
-        // Create modal
-        FilePond.create(document.querySelector('#create_page_main_image'), {
+        // Create modal FilePond
+        const createPond = FilePond.create(document.querySelector('#create_page_main_image'), {
             ...filepondConfig,
             allowMultiple: false,
             labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
-        });
-        FilePond.create(document.querySelector('#create_page_sub_images'), {
-            ...filepondConfig,
-            allowMultiple: true,
-            maxFiles: 10,
-            allowReorder: true,
-            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
         });
 
-        // Edit modal
-        FilePond.create(document.querySelector('#edit_page_main_image'), {
+        // Edit modal FilePond
+        const editPond = FilePond.create(document.querySelector('#edit_page_main_image'), {
             ...filepondConfig,
             allowMultiple: false,
             labelIdle: 'Drag & Drop main image or <span class="filepond--label-action">Browse</span>',
-        });
-        FilePond.create(document.querySelector('#edit_page_sub_images'), {
-            ...filepondConfig,
-            allowMultiple: true,
-            maxFiles: 10,
-            allowReorder: true,
-            labelIdle: 'Drag & Drop sub images or <span class="filepond--label-action">Browse</span>',
         });
     </script>
     <script>
-        let createServiceEditor = null;
-        let editServiceEditor = null;
-
         function syncCompanyServiceSlug(sourceId, previewId, hiddenId) {
             const sourceInput = document.getElementById(sourceId);
             const previewInput = document.getElementById(previewId);
             const hiddenInput = document.getElementById(hiddenId);
             if (!sourceInput || !previewInput || !hiddenInput) return;
-            const slug = String(sourceInput.value || '').toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            const slug = String(sourceInput.value || '').toLowerCase().trim()
+                .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
             previewInput.value = slug;
             hiddenInput.value = slug;
         }
 
-        function initCompanyServiceEditors() {
-            if (!createServiceEditor) {
-                // ClassicEditor.create(document.querySelector('#create_page_content')).then(editor => { createServiceEditor = editor; });
-                CKEDITOR.replace( 'create_page_content', {
-                    versionCheck: false,
-                } );
+        // Clear all validation errors from a modal
+        function clearValidationErrors(modalEl) {
+            modalEl.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+            modalEl.querySelectorAll('.invalid-feedback, .text-danger.small.mt-1, .ajax-error').forEach(el => el.remove());
+        }
+
+        // Show validation errors inside a modal
+        function showValidationErrors(modalEl, errors) {
+            clearValidationErrors(modalEl);
+            for (const [field, messages] of Object.entries(errors)) {
+                const input = modalEl.querySelector(`[name="${field}"]`);
+                if (input) {
+                    input.classList.add('is-invalid');
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback ajax-error';
+                    errorDiv.textContent = messages[0];
+                    // Insert after input (or after its parent for checkboxes)
+                    const target = input.closest('.form-check') || input;
+                    target.parentNode.insertBefore(errorDiv, target.nextSibling);
+                    if (input.closest('.form-check')) errorDiv.classList.add('d-block');
+                }
             }
-            if (!editServiceEditor) {
-                // ClassicEditor.create(document.querySelector('#edit_page_content')).then(editor => { editServiceEditor = editor; });
-                CKEDITOR.replace( 'edit_page_content', {
-                    versionCheck: false,
-                } );
+        }
+
+        // Submit form via AJAX with FormData (supports file uploads)
+        function submitFormAjax(form, modalEl, successMessage) {
+            // Sync CKEditor data to textarea before building FormData
+            for (const instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
             }
+
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Saving...';
+
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function (response) {
+                    bootstrap.Modal.getInstance(modalEl)?.hide();
+                    showAjaxToast('success', response.message || successMessage);
+                    setTimeout(function () { location.reload(); }, 800);
+                },
+                error: function (xhr) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    if (xhr.status === 422 && xhr.responseJSON?.errors) {
+                        showValidationErrors(modalEl, xhr.responseJSON.errors);
+                    } else {
+                        showAjaxToast('error', xhr.responseJSON?.message || 'Something went wrong. Please try again.');
+                    }
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             const createModalEl = document.getElementById('createServiceModal');
             const editModalEl = document.getElementById('editServiceModal');
+            const createForm = createModalEl.querySelector('form');
             const editForm = document.getElementById('editServiceForm');
-            const editServiceId = document.getElementById('edit_service_id');
-            const editName = document.getElementById('edit_name');
-            const editContentTitle = document.getElementById('edit_content_title');
-            const editMenuType = document.getElementById('edit_service_menu_type');
-            const editStatus = document.getElementById('edit_status');
             const editMainPreview = document.getElementById('edit_main_image_preview');
-            const editSubPreview = document.getElementById('edit_sub_images_preview');
 
-            initCompanyServiceEditors();
+            // Init CKEditor 4
+            CKEDITOR.replace('create_page_content', { versionCheck: false });
+            CKEDITOR.replace('edit_page_content', { versionCheck: false });
 
+            // DataTable
             $('#companyServiceTable').DataTable({
                 pageLength: 10,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
@@ -306,45 +323,57 @@
                 }
             });
 
+            // AJAX Create
+            createForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitFormAjax(createForm, createModalEl, 'Company service created successfully.');
+            });
+
+            // AJAX Update
+            editForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitFormAjax(editForm, editModalEl, 'Company service updated successfully.');
+            });
+
+            // Populate edit modal from data attributes
             editModalEl.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
                 if (!button) return;
-                const subImages = JSON.parse(button.getAttribute('data-sub-images') || '[]');
+
+                clearValidationErrors(editModalEl);
+                editPond.removeFiles();
+
                 editForm.action = button.getAttribute('data-action') || '';
-                editServiceId.value = button.getAttribute('data-id') || '';
-                editName.value = button.getAttribute('data-name') || '';
-                editContentTitle.value = button.getAttribute('data-content-title') || '';
-                editMenuType.value = button.getAttribute('data-menu-type') || 'main';
-                editStatus.checked = (button.getAttribute('data-status') || '0') === '1';
-                syncCompanyServiceSlug('edit_name', 'edit_slug', 'edit_slug_hidden');
-                if (editServiceEditor) { editServiceEditor.setData(button.getAttribute('data-page-content') || ''); }
+                document.getElementById('edit_service_id').value = button.getAttribute('data-id') || '';
+                document.getElementById('edit_name').value = button.getAttribute('data-name') || '';
+                document.getElementById('edit_content_title').value = button.getAttribute('data-content-title') || '';
+                document.getElementById('edit_service_menu_type').value = button.getAttribute('data-menu-type') || 'main';
+                document.getElementById('edit_status').checked = (button.getAttribute('data-status') || '0') === '1';
+                document.getElementById('edit_slug').value = button.getAttribute('data-slug') || '';
+                document.getElementById('edit_slug_hidden').value = button.getAttribute('data-slug') || '';
+
+                // Set CKEditor content
+                const ckInstance = CKEDITOR.instances['edit_page_content'];
+                if (ckInstance) {
+                    ckInstance.setData(button.getAttribute('data-page-content') || '');
+                }
+
+                // Main image preview
                 const mainImage = button.getAttribute('data-main-image') || '';
-                editMainPreview.innerHTML = mainImage ? `<img src="${mainImage}" alt="Main image" class="service-image-thumb">` : '<span class="text-muted small">No main image uploaded.</span>';
-                editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="service-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
+                editMainPreview.innerHTML = mainImage
+                    ? '<img src="' + mainImage + '" alt="Main image" class="service-image-thumb">'
+                    : '<span class="text-muted small">No main image uploaded.</span>';
             });
 
-            @if(old('form_mode') === 'create')
-                new bootstrap.Modal(createModalEl).show();
-            @endif
+            // Clear create modal on open
+            createModalEl.addEventListener('show.bs.modal', function () {
+                clearValidationErrors(createModalEl);
+                createPond.removeFiles();
+            });
 
-            @if(old('form_mode') === 'edit')
-                editForm.action = @json(old('service_id') ? route('company-services.update', old('service_id')) : route('company-services.index'));
-                editServiceId.value = @json(old('service_id'));
-                editName.value = @json(old('name'));
-                editContentTitle.value = @json(old('content_title'));
-                editMenuType.value = @json(old('service_menu_type', 'main'));
-                editStatus.checked = @json((string) old('status', '1')) === '1';
-                syncCompanyServiceSlug('edit_name', 'edit_slug', 'edit_slug_hidden');
-                setTimeout(function () { if (editServiceEditor) { editServiceEditor.setData(@json(old('page_content'))); } }, 300);
-                editMainPreview.innerHTML = '<span class="text-muted small">Existing images are kept unless you upload new ones.</span>';
-                editSubPreview.innerHTML = '';
-                new bootstrap.Modal(editModalEl).show();
-            @endif
-
+            // Slug sync
             createModalEl.addEventListener('shown.bs.modal', function () { syncCompanyServiceSlug('create_name', 'create_slug', 'create_slug_hidden'); });
             editModalEl.addEventListener('shown.bs.modal', function () { syncCompanyServiceSlug('edit_name', 'edit_slug', 'edit_slug_hidden'); });
-            syncCompanyServiceSlug('create_name', 'create_slug', 'create_slug_hidden');
-            syncCompanyServiceSlug('edit_name', 'edit_slug', 'edit_slug_hidden');
         });
     </script>
 @endpush
