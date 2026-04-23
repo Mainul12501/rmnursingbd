@@ -101,15 +101,7 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#editPageModal"
                                                             data-action="{{ route('pages.update', $page) }}"
-                                                            data-id="{{ $page->id }}"
-                                                            data-page-title="{{ $page->page_title }}"
-                                                            data-menu-title="{{ $page->menu_title }}"
-                                                            data-status="{{ $page->status }}"
-                                                            data-order="{{ $page->order }}"
-                                                            data-slug="{{ $page->slug }}"
-                                                            data-page-content="{{ e($page->page_content) }}"
-                                                            data-main-image="{{ $page->main_image ? asset($page->main_image) : '' }}"
-                                                            data-sub-images='@json(json_decode($page->sub_images ?? "[]", true) ?: [])'>
+                                                            data-id="{{ $page->id }}">
                                                         <i class="fa fa-pencil-alt me-1"></i>
                                                     </button>
                                                     <form action="{{ route('pages.destroy', $page) }}" method="POST">
@@ -290,10 +282,9 @@
     @include('backend.user-management.toasts')
     @include('backend.includes.plugins.datatable')
     @include('backend.includes.plugins.sweetalert2')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
     <script>
-        let createPageEditor = null;
-        let editPageEditor = null;
+        var editPageCKEditor = null;
 
         function syncPageSlug(sourceId, previewId, hiddenId) {
             const sourceInput = document.getElementById(sourceId);
@@ -305,15 +296,6 @@
             hiddenInput.value = slug;
         }
 
-        function initPageEditors() {
-            if (!createPageEditor) {
-                ClassicEditor.create(document.querySelector('#create_page_content')).then(editor => { createPageEditor = editor; });
-            }
-            if (!editPageEditor) {
-                ClassicEditor.create(document.querySelector('#edit_page_content')).then(editor => { editPageEditor = editor; });
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
             const createModalEl = document.getElementById('createPageModal');
             const editModalEl = document.getElementById('editPageModal');
@@ -321,12 +303,11 @@
             const editPageId = document.getElementById('edit_page_id');
             const editPageTitle = document.getElementById('edit_page_title');
             const editMenuTitle = document.getElementById('edit_menu_title');
-            // const editOrder = document.getElementById('edit_order');
             const editStatus = document.getElementById('edit_status');
             const editMainPreview = document.getElementById('edit_main_image_preview');
-            // const editSubPreview = document.getElementById('edit_sub_images_preview');
 
-            initPageEditors();
+            // Initialize CKEditor for create modal textarea
+            CKEDITOR.replace('create_page_content', { versionCheck: false });
 
             $('#pageTable').DataTable({
                 pageLength: 10,
@@ -344,21 +325,66 @@
                 }
             });
 
+            // Fetch data from server via AJAX when edit modal opens
             editModalEl.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
                 if (!button) return;
-                const subImages = JSON.parse(button.getAttribute('data-sub-images') || '[]');
+
+                var pageId = button.getAttribute('data-id');
                 editForm.action = button.getAttribute('data-action') || '';
-                editPageId.value = button.getAttribute('data-id') || '';
-                editPageTitle.value = button.getAttribute('data-page-title') || '';
-                editMenuTitle.value = button.getAttribute('data-menu-title') || '';
-                // editOrder.value = button.getAttribute('data-order') || '1';
-                editStatus.checked = (button.getAttribute('data-status') || '0') === '1';
+                editPageId.value = pageId;
+
+                // Store page ID for CKEditor to use after instanceReady
+                editModalEl.setAttribute('data-pending-page-id', pageId);
+
+                $.ajax({
+                    url: '/pages/' + pageId + '/edit',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (page) {
+                        editPageTitle.value = page.page_title || '';
+                        editMenuTitle.value = page.menu_title || '';
+                        editStatus.checked = page.status == 1;
+                        syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
+
+                        // Store content for CKEditor (keep HTML so CKEditor renders it as rich text)
+                        var content = page.page_content || '';
+                        document.getElementById('edit_page_content').value = content;
+                        document.getElementById('edit_page_content').setAttribute('data-pending-content', content);
+                        if (editPageCKEditor) {
+                            editPageCKEditor.setData(content);
+                        }
+
+                        // Main image preview
+                        var mainImage = page.main_image ? '{{ asset("") }}' + page.main_image : '';
+                        editMainPreview.innerHTML = mainImage
+                            ? '<img src="' + mainImage + '" alt="Main image" class="page-image-thumb">'
+                            : '<span class="text-muted small">No main image uploaded.</span>';
+                    },
+                    error: function () {
+                        alert('Failed to load page data. Please try again.');
+                    }
+                });
+            });
+
+            // Initialize CKEditor for edit modal when fully visible
+            editModalEl.addEventListener('shown.bs.modal', function () {
                 syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
-                if (editPageEditor) { editPageEditor.setData(button.getAttribute('data-page-content') || ''); }
-                const mainImage = button.getAttribute('data-main-image') || '';
-                editMainPreview.innerHTML = mainImage ? `<img src="${mainImage}" alt="Main image" class="page-image-thumb">` : '<span class="text-muted small">No main image uploaded.</span>';
-                // editSubPreview.innerHTML = subImages.length ? subImages.map((path) => `<img src="${base_url}${path}" alt="Sub image" class="page-image-thumb">`).join('') : '<span class="text-muted small">No sub images uploaded.</span>';
+                if (!editPageCKEditor) {
+                    editPageCKEditor = CKEDITOR.replace('edit_page_content', { versionCheck: false });
+                    editPageCKEditor.on('instanceReady', function () {
+                        var content = document.getElementById('edit_page_content').getAttribute('data-pending-content') || '';
+                        editPageCKEditor.setData(content);
+                    });
+                }
+            });
+
+            // Destroy CKEditor when edit modal is hidden to avoid stale instances
+            editModalEl.addEventListener('hidden.bs.modal', function () {
+                if (editPageCKEditor) {
+                    editPageCKEditor.destroy();
+                    editPageCKEditor = null;
+                }
             });
 
             @if(old('form_mode') === 'create')
@@ -370,17 +396,16 @@
                 editPageId.value = @json(old('page_id'));
                 editPageTitle.value = @json(old('page_title'));
                 editMenuTitle.value = @json(old('menu_title'));
-                {{--editOrder.value = @json(old('order', 1));--}}
                 editStatus.checked = @json((string) old('status', '1')) === '1';
                 syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
-                setTimeout(function () { if (editPageEditor) { editPageEditor.setData(@json(old('page_content'))); } }, 300);
+                var oldContent = @json(old('page_content')) || '';
+                document.getElementById('edit_page_content').value = oldContent;
+                document.getElementById('edit_page_content').setAttribute('data-pending-content', oldContent);
                 editMainPreview.innerHTML = '<span class="text-muted small">Existing images are kept unless you upload new ones.</span>';
-                // editSubPreview.innerHTML = '';
                 new bootstrap.Modal(editModalEl).show();
             @endif
 
             createModalEl.addEventListener('shown.bs.modal', function () { syncPageSlug('create_page_title', 'create_slug', 'create_slug_hidden'); });
-            editModalEl.addEventListener('shown.bs.modal', function () { syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden'); });
             syncPageSlug('create_page_title', 'create_slug', 'create_slug_hidden');
             syncPageSlug('edit_page_title', 'edit_slug', 'edit_slug_hidden');
         });

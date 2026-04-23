@@ -167,7 +167,7 @@
                                 </select>
                                 @if(old('form_mode') === 'create') @error('requested_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <label for="create_company_service_id" class="form-label">Service</label>
                                 <select id="create_company_service_id" name="company_service_id" class="form-select @if(old('form_mode') === 'create') @error('company_service_id') is-invalid @enderror @endif">
                                     <option value="">Select service</option>
@@ -201,16 +201,16 @@
                                 </select>
                                 @if(old('form_mode') === 'create') @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
-                                <label for="create_managed_user_id" class="form-label">Managed By</label>
-                                <select id="create_managed_user_id" name="managed_user_id" class="form-select @if(old('form_mode') === 'create') @error('managed_user_id') is-invalid @enderror @endif">
-                                    <option value="">Unassigned</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('form_mode') === 'create' && (string) old('managed_user_id') === (string) $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if(old('form_mode') === 'create') @error('managed_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="create_managed_user_id" class="form-label">Managed By</label>--}}
+{{--                                <select id="create_managed_user_id" name="managed_user_id" class="form-select @if(old('form_mode') === 'create') @error('managed_user_id') is-invalid @enderror @endif">--}}
+{{--                                    <option value="">Unassigned</option>--}}
+{{--                                    @foreach($users as $user)--}}
+{{--                                        <option value="{{ $user->id }}" {{ old('form_mode') === 'create' && (string) old('managed_user_id') === (string) $user->id ? 'selected' : '' }}>{{ $user->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                @if(old('form_mode') === 'create') @error('managed_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="create_subject" class="form-label">Subject <span class="text-danger">*</span></label>
                                 <input type="text" id="create_subject" name="subject" class="form-control @if(old('form_mode') === 'create') @error('subject') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('subject') : '' }}" placeholder="Enter subject">
@@ -256,7 +256,7 @@
                                 </select>
                                 @if(old('form_mode') === 'edit') @error('requested_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <label for="edit_company_service_id" class="form-label">Service</label>
                                 <select id="edit_company_service_id" name="company_service_id" class="form-select @if(old('form_mode') === 'edit') @error('company_service_id') is-invalid @enderror @endif">
                                     <option value="">Select service</option>
@@ -290,16 +290,16 @@
                                 </select>
                                 @if(old('form_mode') === 'edit') @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
-                                <label for="edit_managed_user_id" class="form-label">Managed By</label>
-                                <select id="edit_managed_user_id" name="managed_user_id" class="form-select @if(old('form_mode') === 'edit') @error('managed_user_id') is-invalid @enderror @endif">
-                                    <option value="">Unassigned</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('form_mode') === 'edit' && (string) old('managed_user_id') === (string) $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if(old('form_mode') === 'edit') @error('managed_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="edit_managed_user_id" class="form-label">Managed By</label>--}}
+{{--                                <select id="edit_managed_user_id" name="managed_user_id" class="form-select @if(old('form_mode') === 'edit') @error('managed_user_id') is-invalid @enderror @endif">--}}
+{{--                                    <option value="">Unassigned</option>--}}
+{{--                                    @foreach($users as $user)--}}
+{{--                                        <option value="{{ $user->id }}" {{ old('form_mode') === 'edit' && (string) old('managed_user_id') === (string) $user->id ? 'selected' : '' }}>{{ $user->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                @if(old('form_mode') === 'edit') @error('managed_user_id') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <label for="edit_subject" class="form-label">Subject <span class="text-danger">*</span></label>
                                 <input type="text" id="edit_subject" name="subject" class="form-control @if(old('form_mode') === 'edit') @error('subject') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('subject') : '' }}" placeholder="Enter subject">
@@ -377,7 +377,7 @@
                 document.getElementById('edit_subject').value = button.getAttribute('data-subject') || '';
                 document.getElementById('edit_message').value = button.getAttribute('data-message') || '';
                 document.getElementById('edit_status').value = button.getAttribute('data-status') || 'pending';
-                document.getElementById('edit_managed_user_id').value = button.getAttribute('data-managed-user-id') || '';
+                // document.getElementById('edit_managed_user_id').value = button.getAttribute('data-managed-user-id') || '';
             });
 
             @if(old('form_mode') === 'create')
@@ -395,7 +395,7 @@
                 document.getElementById('edit_subject').value = @json(old('subject'));
                 document.getElementById('edit_message').value = @json(old('message'));
                 document.getElementById('edit_status').value = @json(old('status', 'pending'));
-                document.getElementById('edit_managed_user_id').value = @json((string) old('managed_user_id'));
+{{--                document.getElementById('edit_managed_user_id').value = @json((string) old('managed_user_id'));--}}
                 new bootstrap.Modal(editModalEl).show();
             @endif
         });

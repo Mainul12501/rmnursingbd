@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Backend\HomeSliderController;
 use App\Http\Controllers\Controller;
 use App\Models\AppointmentRequest;
+use App\Models\ClientReview;
 use App\Models\CompanyService;
+use App\Models\HomeSlider;
 use App\Models\NewsEvent;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -16,6 +19,8 @@ class PageViewController extends Controller
         return view('frontend.common-pages.home', [
             'services' => CompanyService::where('status' , 1)->take(6)->latest()->get(),
             'newsEvents' => NewsEvent::where('status' , 1)->take(3)->latest()->get(),
+            'sliders' => HomeSlider::where('status', 1)->take(4)->latest()->get(),
+            'clientReviews' => ClientReview::where('status', 1)->take(5)->latest()->get(),
         ]);
     }
     public function pageView(Request $request, $slug)

@@ -132,7 +132,7 @@
                                                         data-title="{{ $newsEvent->title }}"
                                                         data-slug="{{ $newsEvent->slug }}"
                                                         data-status="{{ $newsEvent->status }}"
-                                                        data-main-content="{{ e($newsEvent->main_content) }}"
+                                                        data-main-content="{{ strip_tags($newsEvent->main_content) }}"
                                                         data-main-image="{{ $newsEvent->main_image ? asset($newsEvent->main_image) : '' }}"
 {{--                                                        data-sub-images='@json(($newsEvent->sub_images ?? []))'--}}
                                                     >
@@ -398,11 +398,35 @@
         // });
     </script>
     <script>
+        var editNewsEventEditor = null;
+
         $(function () {
             CKEDITOR.replace( 'create_main_content', {
                 versionCheck: false,
             } );
         })
+
+        // Initialize CKEditor for edit modal when shown (CKEditor needs visible textarea)
+        document.getElementById('editEventModal').addEventListener('shown.bs.modal', function () {
+            if (!editNewsEventEditor) {
+                editNewsEventEditor = CKEDITOR.replace('edit_main_content', {
+                    versionCheck: false,
+                });
+                // Set data after editor is ready
+                editNewsEventEditor.on('instanceReady', function () {
+                    var content = document.getElementById('edit_main_content').getAttribute('data-pending-content') || '';
+                    editNewsEventEditor.setData(content);
+                });
+            }
+        });
+
+        // Destroy CKEditor when edit modal is hidden to avoid stale instances
+        document.getElementById('editEventModal').addEventListener('hidden.bs.modal', function () {
+            if (editNewsEventEditor) {
+                editNewsEventEditor.destroy();
+                editNewsEventEditor = null;
+            }
+        });
     </script>
     <script>
         function syncNewsEventSlug(sourceId, previewId, hiddenId) {
@@ -454,7 +478,12 @@
                 editTitle.value = button.getAttribute('data-title') || '';
                 syncNewsEventSlug('edit_title', 'edit_slug', 'edit_slug_hidden');
                 editStatus.checked = (button.getAttribute('data-status') || '0') === '1';
-                editContent.value = button.getAttribute('data-main-content') || '';
+                var mainContent = button.getAttribute('data-main-content') || '';
+                editContent.value = mainContent;
+                editContent.setAttribute('data-pending-content', mainContent);
+                if (editNewsEventEditor) {
+                    editNewsEventEditor.setData(mainContent);
+                }
 
                 const mainImage = button.getAttribute('data-main-image') || '';
                 editMainPreview.innerHTML = mainImage ? `<img src="${mainImage}" alt="Main image" class="event-image-thumb">` : '<span class="text-muted small">No main image uploaded.</span>';
@@ -472,7 +501,9 @@
                 editTitle.value = @json(old('title'));
                 syncNewsEventSlug('edit_title', 'edit_slug', 'edit_slug_hidden');
                 editStatus.checked = @json((string) old('status', '1')) === '1';
-                editContent.value = @json(old('main_content'));
+                var oldContent = @json(old('main_content'));
+                editContent.value = oldContent;
+                editContent.setAttribute('data-pending-content', oldContent || '');
                 editMainPreview.innerHTML = '<span class="text-muted small">Existing images are kept unless you upload new ones.</span>';
                 // editSubPreview.innerHTML = '';
                 new bootstrap.Modal(editModalEl).show();

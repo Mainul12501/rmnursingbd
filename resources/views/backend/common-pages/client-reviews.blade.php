@@ -126,7 +126,7 @@
                                                         data-rating="{{ $clientReview->rating }}"
                                                         data-pub-date="{{ $clientReview->pub_date }}"
                                                         data-status="{{ $clientReview->status }}"
-                                                        data-content="{{ e($clientReview->content) }}"
+                                                        data-content="{{ $clientReview->content }}"
                                                         data-image="{{ $clientReview->client_image ? asset($clientReview->client_image) : '' }}">
                                                         <i class="fa fa-pencil-alt me-1"></i>
                                                     </button>
@@ -303,30 +303,30 @@
     @include('backend.includes.plugins.datatable')
     @include('backend.includes.plugins.select2')
     @include('backend.includes.plugins.sweetalert2')
-    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+{{--    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>--}}
     <script>
         let createClientReviewEditor = null;
         let editClientReviewEditor = null;
 
-        function initClientReviewEditors() {
-            if (!createClientReviewEditor) {
-                createClientReviewEditor = CKEDITOR.replace('create_content', {
-                    versionCheck: false,
-                });
-            }
+        // function initClientReviewEditors() {
+        //     if (!createClientReviewEditor) {
+        //         createClientReviewEditor = CKEDITOR.replace('create_content', {
+        //             versionCheck: false,
+        //         });
+        //     }
+        //
+        //     if (!editClientReviewEditor) {
+        //         editClientReviewEditor = CKEDITOR.replace('edit_content', {
+        //             versionCheck: false,
+        //         });
+        //     }
+        // }
 
-            if (!editClientReviewEditor) {
-                editClientReviewEditor = CKEDITOR.replace('edit_content', {
-                    versionCheck: false,
-                });
-            }
-        }
-
-        function syncClientReviewEditors() {
-            Object.keys(CKEDITOR.instances).forEach(function (instanceName) {
-                CKEDITOR.instances[instanceName].updateElement();
-            });
-        }
+        // function syncClientReviewEditors() {
+        //     Object.keys(CKEDITOR.instances).forEach(function (instanceName) {
+        //         CKEDITOR.instances[instanceName].updateElement();
+        //     });
+        // }
 
         function stripHtmlTags(value) {
             const parser = new DOMParser();
@@ -346,7 +346,7 @@
             const editStatus = document.getElementById('edit_status');
             const editImagePreview = document.getElementById('edit_client_image_preview');
 
-            initClientReviewEditors();
+            // initClientReviewEditors();
 
             if ($('#clientReviewTable').length) {
                 $('#clientReviewTable').DataTable({
@@ -366,11 +366,11 @@
                 });
             }
 
-            [createModalEl, editModalEl].forEach(function (modalEl) {
-                modalEl.querySelectorAll('form').forEach(function (form) {
-                    form.addEventListener('submit', syncClientReviewEditors);
-                });
-            });
+            // [createModalEl, editModalEl].forEach(function (modalEl) {
+            //     modalEl.querySelectorAll('form').forEach(function (form) {
+            //         form.addEventListener('submit', syncClientReviewEditors);
+            //     });
+            // });
 
             editModalEl.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
@@ -386,6 +386,8 @@
 
                 if (editClientReviewEditor) {
                     editClientReviewEditor.setData(stripHtmlTags(button.getAttribute('data-content') || ''));
+                } else {
+                    document.getElementById('edit_content').value = button.getAttribute('data-content') || '';
                 }
 
                 const imageUrl = button.getAttribute('data-image') || '';
@@ -414,6 +416,8 @@
                 setTimeout(function () {
                     if (editClientReviewEditor) {
                         editClientReviewEditor.setData(stripHtmlTags(@json(old('content'))));
+                    } else {
+                        document.getElementById('edit_content').value = @json(old('content'));
                     }
                 }, 300);
                 editImagePreview.innerHTML = '<span class="text-muted small">Existing image will remain unless you upload a new file.</span>';

@@ -8,61 +8,100 @@
 
 @section('body')
     <!-- ====== HERO SECTION ====== -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <h1>HOME<br>CAREGIVER<br>SERVICES</h1>
-                        <p>We provide professional, reliable, and compassionate home healthcare services right at your doorstep in Dhaka.</p>
-                        <div class="hero-buttons">
-                            <a href="{{ route('contact-us') }}" class="btn btn-hero-green">Contact Us</a>
-                            <a href="{{ route('service-categories') }}" class="btn btn-hero-outline">Our Services</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 d-none d-lg-block">
-                    <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=500&fit=crop" alt="Home Care Services" class="img-fluid hero-img-main">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero bottom cards -->
-        <div class="hero-bottom-cards">
-            <div class="container">
-                <div class="row g-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>
-                            <div>
-                                <h4>Professional Nurses</h4>
-                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>
+    @if(isset($sliders) && count($sliders) > 0)
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="carouselExampleCaptions" class="carousel slide">
+                            <div class="carousel-indicators">
+                                @foreach($sliders as $index => $slider)
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" ></button>
+                                @endforeach
+{{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>--}}
+{{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>
-                            <div>
-                                <h4>24/7 Available</h4>
-                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>
+                            <div class="carousel-inner">
+                                @foreach($sliders as $key => $slider)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset($slider->image) }}" class="d-block w-100" alt="{{ $slider->title }}" style="height: 450px">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h1>{{ $slider->title ?? '' }}</h1>
+                                            <p>{{ $slider->content ?? '' }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>
-                            <div>
-                                <h4>Guaranteed Satisfaction</h4>
-                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>
-                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
+
+{{--    <section class="hero-section">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row align-items-center">--}}
+{{--                <div class="col-lg-6">--}}
+{{--                    <div class="hero-content">--}}
+{{--                        <h1>HOME<br>CAREGIVER<br>SERVICES</h1>--}}
+{{--                        <p>We provide professional, reliable, and compassionate home healthcare services right at your doorstep in Dhaka.</p>--}}
+{{--                        <div class="hero-buttons">--}}
+{{--                            <a href="{{ route('contact-us') }}" class="btn btn-hero-green">Contact Us</a>--}}
+{{--                            <a href="{{ route('service-categories') }}" class="btn btn-hero-outline">Our Services</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-6 d-none d-lg-block">--}}
+{{--                    <div class="hero-image">--}}
+{{--                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=500&fit=crop" alt="Home Care Services" class="img-fluid hero-img-main">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- Hero bottom cards -->--}}
+{{--        <div class="hero-bottom-cards">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row g-3">--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>Professional Nurses</h4>--}}
+{{--                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>24/7 Available</h4>--}}
+{{--                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>Guaranteed Satisfaction</h4>--}}
+{{--                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <!-- ====== ABOUT / WELCOME SECTION ====== -->
     <section id="about" class="about-section">
@@ -104,7 +143,7 @@
                             @endif
                             <div class="service-body">
                                 <h3>{{ $service->name ?? 'Service Name' }}</h3>
-                                <p>{{ str()->words($service->page_content, 30, '...') }}</p>
+                                <p>{!! str()->words($service->page_content, 30, '...') !!}</p>
                                 <a href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -299,61 +338,76 @@
     </section>
 
     <!-- ====== CLIENT REVIEWS ====== -->
-    <section class="reviews-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Client's Reviews</h2>
-                <p class="section-desc">What our clients say about us</p>
+    @if(isset($clientReviews) && count($clientReviews) > 0)
+        <section class="reviews-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Client's Reviews</h2>
+                    <p class="section-desc">What our clients say about us</p>
+                </div>
+                <div class="owl-carousel owl-theme review-carousel">
+                    @foreach($clientReviews as $clientReview)
+                        <div class="item">
+                            <div class="review-card">
+                                <div class="review-stars">
+                                    @for($i = 1; $i <= $clientReview->rating; $i++)
+                                        <i class="fas fa-star"></i>
+                                    @endfor
+                                </div>
+                                <p>"{!! $clientReview->content ?? '' !!}"</p>
+                                <div class="review-author">
+                                    <div class="review-avatar">
+                                        @if($clientReview->client_image && file_exists(public_path($clientReview->client_image)))
+                                            <img src="{{ asset($clientReview->client_image) }}" alt="{{ $clientReview->client_name }}" style="border-radius: 50%" />
+                                        @else
+                                            <i class="fas fa-user"></i>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h4>{{ $clientReview->client_name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+
+{{--                    <div class="col-lg-4 col-md-6">--}}
+{{--                        <div class="review-card">--}}
+{{--                            <div class="review-stars">--}}
+{{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
+{{--                            </div>--}}
+{{--                            <p>"We hired a caregiver for my elderly mother and the service has been excellent. The caregiver is kind, patient, and treats my mother like family."</p>--}}
+{{--                            <div class="review-author">--}}
+{{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
+{{--                                <div>--}}
+{{--                                    <h4>Nasreen Begum</h4>--}}
+{{--                                    <span>Dhanmondi, Dhaka</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-lg-4 col-md-6">--}}
+{{--                        <div class="review-card">--}}
+{{--                            <div class="review-stars">--}}
+{{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
+{{--                            </div>--}}
+{{--                            <p>"Quick response time and professional service. The oxygen cylinder was delivered within an hour. Their 24/7 availability is truly a lifesaver."</p>--}}
+{{--                            <div class="review-author">--}}
+{{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
+{{--                                <div>--}}
+{{--                                    <h4>Kamal Hossain</h4>--}}
+{{--                                    <span>Gulshan, Dhaka</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                </div>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="review-card">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"The nursing care provided by {{ $siteSetting->meta_title ?? 'RM Nursing BD' }} was outstanding. The nurse was professional and took excellent care of my father after his surgery."</p>
-                        <div class="review-author">
-                            <div class="review-avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <h4>Rafiq Ahmed</h4>
-                                <span>Uttara, Dhaka</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="review-card">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"We hired a caregiver for my elderly mother and the service has been excellent. The caregiver is kind, patient, and treats my mother like family."</p>
-                        <div class="review-author">
-                            <div class="review-avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <h4>Nasreen Begum</h4>
-                                <span>Dhanmondi, Dhaka</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="review-card">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"Quick response time and professional service. The oxygen cylinder was delivered within an hour. Their 24/7 availability is truly a lifesaver."</p>
-                        <div class="review-author">
-                            <div class="review-avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <h4>Kamal Hossain</h4>
-                                <span>Gulshan, Dhaka</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    @endif
+
 
     <!-- ====== NEWS & EVENTS ====== -->
     <section id="news" class="news-section">
@@ -372,7 +426,7 @@
                             </div>
                             <div class="news-body">
                                 <h3><a href="#">{{ $newsEvent->main_title ?? '' }}</a></h3>
-                                <p>{{ str()->words($newsEvent->main_content, 30, '...') }}</p>
+                                <p>{!! str()->words($newsEvent->main_content, 30, '...') !!}</p>
                                 <a href="{{ route('news-event-details', ['newsEventSlug' => $newsEvent->slug]) }}" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
@@ -480,6 +534,28 @@
     </section>
 @endsection
 
-@push('script')
+@push('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
 
+@push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function () {
+            $('.review-carousel').owlCarousel({
+                loop: true,
+                margin: 24,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: { items: 1 },
+                    768: { items: 2 },
+                    1024: { items: 3 }
+                }
+            });
+        });
+    </script>
 @endpush
