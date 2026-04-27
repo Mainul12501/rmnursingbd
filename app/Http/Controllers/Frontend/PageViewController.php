@@ -10,6 +10,7 @@ use App\Models\CompanyService;
 use App\Models\HomeSlider;
 use App\Models\NewsEvent;
 use App\Models\Page;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
 class PageViewController extends Controller
@@ -21,6 +22,7 @@ class PageViewController extends Controller
             'newsEvents' => NewsEvent::where('status' , 1)->take(3)->latest()->get(),
             'sliders' => HomeSlider::where('status', 1)->take(4)->latest()->get(),
             'clientReviews' => ClientReview::where('status', 1)->take(5)->latest()->get(),
+            'siteSetting' => SiteSetting::first(),
         ]);
     }
     public function pageView(Request $request, $slug)

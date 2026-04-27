@@ -330,7 +330,7 @@
                         <p>Get professional home care services. Call us now or fill out the form to book.</p>
                     </div>
                     <div class="col-lg-4 col-md-5 text-md-end">
-                        <a href="tel:+8801754839059" class="btn btn-appointment"><i class="fas fa-phone-alt me-2"></i> +880 1754-839059</a>
+                        <a href="tel:{{ $siteSetting ? $siteSetting->office_mobile : '' }}" class="btn btn-appointment"><i class="fas fa-phone-alt me-2"></i> {{ $siteSetting ? $siteSetting->office_mobile : '01700000000' }}</a>
                     </div>
                 </div>
             </div>
