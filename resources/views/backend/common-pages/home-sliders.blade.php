@@ -67,8 +67,8 @@
                                     <tr>
                                         <th style="width: 60px;">#</th>
                                         <th>Image</th>
-                                        <th>Title</th>
-                                        <th>Content</th>
+{{--                                        <th>Title</th>--}}
+{{--                                        <th>Content</th>--}}
                                         <th>Status</th>
                                         <th class="text-end" style="width: 170px;">Action</th>
                                     </tr>
@@ -86,11 +86,11 @@
                                                     </div>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <div class="fw-semibold">{{ $slider->title ?: 'Untitled slider' }}</div>
-                                                <div class="small text-muted">Updated {{ $slider->updated_at?->diffForHumans() }}</div>
-                                            </td>
-                                            <td>{{ \Illuminate\Support\Str::limit(strip_tags((string) $slider->content), 100) ?: 'No content added.' }}</td>
+{{--                                            <td>--}}
+{{--                                                <div class="fw-semibold">{{ $slider->title ?: 'Untitled slider' }}</div>--}}
+{{--                                                <div class="small text-muted">Updated {{ $slider->updated_at?->diffForHumans() }}</div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>{{ \Illuminate\Support\Str::limit(strip_tags((string) $slider->content), 100) ?: 'No content added.' }}</td>--}}
                                             <td><span class="badge {{ $slider->status ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-danger-subtle text-danger border border-danger-subtle' }}">{{ $slider->status ? 'Active' : 'Inactive' }}</span></td>
                                             <td class="text-end">
                                                 <div class="btn-group">
@@ -101,8 +101,8 @@
                                                         data-bs-target="#editHomeSliderModal"
                                                         data-action="{{ route('home-sliders.update', $slider) }}"
                                                         data-id="{{ $slider->id }}"
-                                                        data-title="{{ $slider->title }}"
-                                                        data-content="{{ e($slider->content) }}"
+{{--                                                        data-title="{{ $slider->title }}"--}}
+{{--                                                        data-content="{{ e($slider->content) }}"--}}
                                                         data-status="{{ $slider->status }}"
                                                         data-image="{{ $slider->image ? asset($slider->image) : '' }}">
                                                         <i class="fa fa-pencil-alt me-1"></i>
@@ -146,16 +146,16 @@
                                 <div class="form-text">Accepted formats: JPG, PNG, WEBP. Max size 4MB.</div>
                                 @if(old('form_mode') === 'create') @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                             </div>
-                            <div class="col-md-6">
-                                <label for="create_title" class="form-label">Title</label>
-                                <input type="text" id="create_title" name="title" class="form-control @if(old('form_mode') === 'create') @error('title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('title') : '' }}" placeholder="Enter slider title">
-                                @if(old('form_mode') === 'create') @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
-                            <div class="col-12">
-                                <label for="create_content" class="form-label">Content</label>
-                                <textarea id="create_content" name="content" rows="5" class="form-control @if(old('form_mode') === 'create') @error('content') is-invalid @enderror @endif" placeholder="Write slider content here...">{{ old('form_mode') === 'create' ? old('content') : '' }}</textarea>
-                                @if(old('form_mode') === 'create') @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="create_title" class="form-label">Title</label>--}}
+{{--                                <input type="text" id="create_title" name="title" class="form-control @if(old('form_mode') === 'create') @error('title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'create' ? old('title') : '' }}" placeholder="Enter slider title">--}}
+{{--                                @if(old('form_mode') === 'create') @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
+{{--                            <div class="col-12">--}}
+{{--                                <label for="create_content" class="form-label">Content</label>--}}
+{{--                                <textarea id="create_content" name="content" rows="5" class="form-control @if(old('form_mode') === 'create') @error('content') is-invalid @enderror @endif" placeholder="Write slider content here...">{{ old('form_mode') === 'create' ? old('content') : '' }}</textarea>--}}
+{{--                                @if(old('form_mode') === 'create') @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-md-6">
                                 <label class="form-label d-block">Status <span class="text-danger">*</span></label>
                                 <input type="hidden" name="status" value="0">
@@ -197,16 +197,16 @@
                                 @if(old('form_mode') === 'edit') @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
                                 <div id="edit_image_preview" class="mt-2"></div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="edit_title" class="form-label">Title</label>
-                                <input type="text" id="edit_title" name="title" class="form-control @if(old('form_mode') === 'edit') @error('title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('title') : '' }}" placeholder="Enter slider title">
-                                @if(old('form_mode') === 'edit') @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
-                            <div class="col-12">
-                                <label for="edit_content" class="form-label">Content</label>
-                                <textarea id="edit_content" name="content" rows="5" class="form-control @if(old('form_mode') === 'edit') @error('content') is-invalid @enderror @endif" placeholder="Write slider content here...">{{ old('form_mode') === 'edit' ? old('content') : '' }}</textarea>
-                                @if(old('form_mode') === 'edit') @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif
-                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label for="edit_title" class="form-label">Title</label>--}}
+{{--                                <input type="text" id="edit_title" name="title" class="form-control @if(old('form_mode') === 'edit') @error('title') is-invalid @enderror @endif" value="{{ old('form_mode') === 'edit' ? old('title') : '' }}" placeholder="Enter slider title">--}}
+{{--                                @if(old('form_mode') === 'edit') @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
+{{--                            <div class="col-12">--}}
+{{--                                <label for="edit_content" class="form-label">Content</label>--}}
+{{--                                <textarea id="edit_content" name="content" rows="5" class="form-control @if(old('form_mode') === 'edit') @error('content') is-invalid @enderror @endif" placeholder="Write slider content here...">{{ old('form_mode') === 'edit' ? old('content') : '' }}</textarea>--}}
+{{--                                @if(old('form_mode') === 'edit') @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror @endif--}}
+{{--                            </div>--}}
                             <div class="col-md-6">
                                 <label class="form-label d-block">Status <span class="text-danger">*</span></label>
                                 <input type="hidden" name="status" value="0">
@@ -252,8 +252,8 @@
             const editModalEl = document.getElementById('editHomeSliderModal');
             const editForm = document.getElementById('editHomeSliderForm');
             const editSliderId = document.getElementById('edit_home_slider_id');
-            const editTitle = document.getElementById('edit_title');
-            const editContent = document.getElementById('edit_content');
+            // const editTitle = document.getElementById('edit_title');
+            // const editContent = document.getElementById('edit_content');
             const editStatus = document.getElementById('edit_status');
             const editImagePreview = document.getElementById('edit_image_preview');
 
@@ -281,8 +281,8 @@
 
                 editForm.action = button.getAttribute('data-action') || '';
                 editSliderId.value = button.getAttribute('data-id') || '';
-                editTitle.value = button.getAttribute('data-title') || '';
-                editContent.value = button.getAttribute('data-content') || '';
+                // editTitle.value = button.getAttribute('data-title') || '';
+                // editContent.value = button.getAttribute('data-content') || '';
                 editStatus.checked = (button.getAttribute('data-status') || '0') === '1';
 
                 const imageUrl = button.getAttribute('data-image') || '';
@@ -298,8 +298,8 @@
             @if(old('form_mode') === 'edit')
                 editForm.action = @json(old('home_slider_id') ? route('home-sliders.update', old('home_slider_id')) : route('home-sliders.index'));
                 editSliderId.value = @json(old('home_slider_id'));
-                editTitle.value = @json(old('title'));
-                editContent.value = @json(old('content'));
+                {{--editTitle.value = @json(old('title'));--}}
+                {{--editContent.value = @json(old('content'));--}}
                 editStatus.checked = @json((string) old('status', '1')) === '1';
                 editImagePreview.innerHTML = '<span class="text-muted small">Existing image will remain unless you upload a new file.</span>';
                 new bootstrap.Modal(editModalEl).show();

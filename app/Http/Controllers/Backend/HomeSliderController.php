@@ -30,8 +30,8 @@ class HomeSliderController extends Controller
 
         $payload = [
             'image' => $this->storeImage($request->file('image')),
-            'title' => $validated['title'] ?: null,
-            'content' => $validated['content'] ?: null,
+//            'title' => $validated['title'] ?: null,
+//            'content' => $validated['content'] ?: null,
             'status' => (int) $validated['status'],
         ];
 
@@ -57,8 +57,8 @@ class HomeSliderController extends Controller
         $validated = $request->validated();
 
         $payload = [
-            'title' => $validated['title'] ?: null,
-            'content' => $validated['content'] ?: null,
+//            'title' => $validated['title'] ?: null,
+//            'content' => $validated['content'] ?: null,
             'status' => (int) $validated['status'],
         ];
 
