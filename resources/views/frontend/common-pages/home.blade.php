@@ -25,10 +25,10 @@
                                 @foreach($sliders as $key => $slider)
                                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                                         <img src="{{ asset($slider->image) }}" class="d-block w-100" alt="{{ $slider->title }}" style="height: 450px">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h1>{{ $slider->title ?? '' }}</h1>
-                                            <p>{{ $slider->content ?? '' }}</p>
-                                        </div>
+{{--                                        <div class="carousel-caption d-none d-md-block">--}}
+{{--                                            <h1>{{ $slider->title ?? '' }}</h1>--}}
+{{--                                            <p>{{ $slider->content ?? '' }}</p>--}}
+{{--                                        </div>--}}
                                     </div>
                                 @endforeach
                             </div>
@@ -47,7 +47,7 @@
         </section>
     @endif
 
-{{--    <section class="hero-section">--}}
+    <section class="hero-section">
 {{--        <div class="container">--}}
 {{--            <div class="row align-items-center">--}}
 {{--                <div class="col-lg-6">--}}
@@ -67,41 +67,41 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-{{--        <!-- Hero bottom cards -->--}}
-{{--        <div class="hero-bottom-cards">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row g-3">--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>Professional Nurses</h4>--}}
-{{--                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>24/7 Available</h4>--}}
-{{--                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>Guaranteed Satisfaction</h4>--}}
-{{--                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+        <!-- Hero bottom cards -->
+        <div class="hero-bottom-cards">
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="hero-card" style="height: 100%">
+                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>
+                            <div>
+                                <h4>Professional Nurses</h4>
+                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="hero-card" style="height: 100%">
+                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>24/7 Available</h4>
+                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="hero-card" style="height: 100%">
+                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <h4>Guaranteed Satisfaction</h4>
+                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ====== ABOUT / WELCOME SECTION ====== -->
     <section id="about" class="about-section">
