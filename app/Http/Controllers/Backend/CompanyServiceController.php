@@ -9,6 +9,7 @@ use App\Models\CompanyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class CompanyServiceController extends Controller
 {
@@ -39,11 +40,13 @@ class CompanyServiceController extends Controller
         ];
 
         if ($request->hasFile('page_main_image')) {
-            $payload['page_main_image'] = $this->storeImage($request->file('page_main_image'), 'main');
+//            $payload['page_main_image'] = $this->storeImage($request->file('page_main_image'), 'main');
+            $payload['page_main_image'] = CustomHelper::fileUpload($request->file('page_main_image'), 'company-services', 'page_main_image');
         }
 
         if ($request->hasFile('page_sub_images')) {
-            $payload['page_sub_images'] = $this->storeMultipleImages($request->file('page_sub_images'));
+//            $payload['page_sub_images'] = $this->storeMultipleImages($request->file('page_sub_images'));
+            $payload['page_sub_images'] = CustomHelper::fileUpload($request->file('page_sub_images'), 'company-services', 'page_sub_images');
         }
 
         CompanyService::create($payload);
@@ -81,13 +84,15 @@ class CompanyServiceController extends Controller
         ];
 
         if ($request->hasFile('page_main_image')) {
-            $this->deleteImage($companyService->page_main_image);
-            $payload['page_main_image'] = $this->storeImage($request->file('page_main_image'), 'main');
+//            $this->deleteImage($companyService->page_main_image);
+//            $payload['page_main_image'] = $this->storeImage($request->file('page_main_image'), 'main');
+            $payload['page_main_image'] = CustomHelper::fileUpload($request->file('page_main_image'), 'company-services', 'page_main_image', null, null, $companyService->page_main_image ?? '');
         }
 
         if ($request->hasFile('page_sub_images')) {
             $this->deleteImages($companyService->page_sub_images ?? []);
-            $payload['page_sub_images'] = $this->storeMultipleImages($request->file('page_sub_images'));
+//            $payload['page_sub_images'] = $this->storeMultipleImages($request->file('page_sub_images'));
+            $payload['page_sub_images'] = CustomHelper::fileUpload($request->file('page_sub_images'), 'company-services', 'page_main_image', null, null, $companyService->page_sub_images ?? '');
         }
 
         $companyService->update($payload);
@@ -103,8 +108,8 @@ class CompanyServiceController extends Controller
 
     public function destroy(CompanyService $companyService): RedirectResponse
     {
-        $this->deleteImage($companyService->page_main_image);
-        $this->deleteImages($companyService->page_sub_images ?? []);
+//        $this->deleteImage($companyService->page_main_image);
+//        $this->deleteImages($companyService->page_sub_images ?? []);
         $companyService->delete();
 
         return redirect()

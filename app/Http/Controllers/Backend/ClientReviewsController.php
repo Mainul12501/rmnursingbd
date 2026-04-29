@@ -9,6 +9,7 @@ use App\Models\ClientReview;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class ClientReviewsController extends Controller
 {
@@ -37,7 +38,8 @@ class ClientReviewsController extends Controller
         ];
 
         if ($request->hasFile('client_image')) {
-            $payload['client_image'] = $this->storeImage($request->file('client_image'));
+//            $payload['client_image'] = $this->storeImage($request->file('client_image'));
+            $payload['client_image'] = CustomHelper::fileUpload($request->file('client_image'), 'client_reviews', 'client_image');
         }
 
         ClientReview::create($payload);
@@ -70,8 +72,9 @@ class ClientReviewsController extends Controller
         ];
 
         if ($request->hasFile('client_image')) {
-            $this->deleteImage($clientReview->client_image);
-            $payload['client_image'] = $this->storeImage($request->file('client_image'));
+//            $this->deleteImage($clientReview->client_image);
+//            $payload['client_image'] = $this->storeImage($request->file('client_image'));
+            $payload['client_image'] = CustomHelper::fileUpload($request->file('client_image'), 'client_reviews', 'client_image', null, null, $clientReview->client_image ?? '');
         }
 
         $clientReview->update($payload);
@@ -83,7 +86,7 @@ class ClientReviewsController extends Controller
 
     public function destroy(ClientReview $clientReview): RedirectResponse
     {
-        $this->deleteImage($clientReview->client_image);
+//        $this->deleteImage($clientReview->client_image);
         $clientReview->delete();
 
         return redirect()

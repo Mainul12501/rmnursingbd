@@ -9,6 +9,7 @@ use App\Models\HomeSlider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class HomeSliderController extends Controller
 {
@@ -29,7 +30,8 @@ class HomeSliderController extends Controller
         $validated = $request->validated();
 
         $payload = [
-            'image' => $this->storeImage($request->file('image')),
+//            'image' => $this->storeImage($request->file('image')),
+            'image' => CustomHelper::fileUpload($request->file('image'), 'home-slider', 'slider'),
 //            'title' => $validated['title'] ?: null,
 //            'content' => $validated['content'] ?: null,
             'status' => (int) $validated['status'],
@@ -63,8 +65,9 @@ class HomeSliderController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            $this->deleteImage($homeSlider->image);
-            $payload['image'] = $this->storeImage($request->file('image'));
+//            $this->deleteImage($homeSlider->image);
+//            $payload['image'] = $this->storeImage($request->file('image'));
+            $payload['image'] = CustomHelper::fileUpload($request->file('image'), 'home-slider', 'slider', null, null, $homeSlider->image ?? '');
         }
 
         $homeSlider->update($payload);
@@ -76,7 +79,7 @@ class HomeSliderController extends Controller
 
     public function destroy(HomeSlider $homeSlider): RedirectResponse
     {
-        $this->deleteImage($homeSlider->image);
+//        $this->deleteImage($homeSlider->image);
         $homeSlider->delete();
 
         return redirect()

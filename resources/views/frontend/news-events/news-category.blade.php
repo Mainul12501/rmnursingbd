@@ -2,12 +2,14 @@
 @section('title', 'News Category')
 
 @section('body')
-    <section class="py-5">
+    <section class="pb-5">
+        <div class="bg-primary py-5">
+            <h3 class="text-center text-white">News & Events</h3>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
                     <div>
-                        <h3>Page Title like Our Service <br> What we offer to you</h3>
                         <div class="row mt-3">
                             @foreach($newsEvents as $newsEvent)
                                 <div class="col-md-4">
@@ -43,6 +45,7 @@
                 </div>
                 <div class="col-md-3">
                     <div>
+                        <h3 class="text-center">Our Other Services</h3>
                         <nav class="nav flex-column">
                             @foreach($services as $service)
                                 <a class="nav-link" href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}">{{ $service->name }}</a>

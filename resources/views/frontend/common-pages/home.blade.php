@@ -3,7 +3,53 @@
 @section('title', 'Home')
 
 @push('style')
-
+    <style>
+        /* Why Choose Us Section */
+        .why-choose-section {
+            background-color: #dce8f5;
+            padding: 60px 0;
+        }
+        .why-card {
+            border-radius: 20px;
+            padding: 40px 30px 35px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+        .why-card--green {
+            background-color: #2cc84d;
+        }
+        .why-card--blue {
+            background-color: #046bd2;
+        }
+        .why-card__icon {
+            margin-bottom: 20px;
+        }
+        .why-card__icon img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        .why-card__title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .why-card__text {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+    </style>
 @endpush
 
 @section('body')
@@ -47,7 +93,7 @@
         </section>
     @endif
 
-    <section class="hero-section">
+{{--    <section class="hero-section">--}}
 {{--        <div class="container">--}}
 {{--            <div class="row align-items-center">--}}
 {{--                <div class="col-lg-6">--}}
@@ -67,36 +113,74 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-        <!-- Hero bottom cards -->
-        <div class="hero-bottom-cards">
-            <div class="container">
-                <div class="row g-3">
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>
-                            <div>
-                                <h4>Professional Nurses</h4>
-                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>
-                            </div>
+{{--        <!-- Hero bottom cards -->--}}
+{{--        <div class="hero-bottom-cards">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row g-3">--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>Professional Nurses</h4>--}}
+{{--                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>24/7 Available</h4>--}}
+{{--                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-lg-4 col-md-4">--}}
+{{--                        <div class="hero-card" style="height: 100%">--}}
+{{--                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>--}}
+{{--                            <div>--}}
+{{--                                <h4>Guaranteed Satisfaction</h4>--}}
+{{--                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
+
+    <!-- ====== WHY CHOOSE US SECTION ====== -->
+    <section class="why-choose-section" id="generateContentHere">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="section-title">Why Choose Us</h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="why-card why-card--green">
+                        <div class="why-card__icon">
+                            <img src="{{ asset('frontend/nurse.png') }}" alt="Professional Nurses">
                         </div>
+                        <h3 class="why-card__title">Professional Nurses</h3>
+                        <p class="why-card__text">Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>
                     </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>
-                            <div>
-                                <h4>24/7 Available</h4>
-                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="why-card why-card--blue">
+                        <div class="why-card__icon">
+                            <img src="{{ asset('frontend/low-cost.png') }}" alt="Affordable Prices">
                         </div>
+                        <h3 class="why-card__title">Affordable Prices</h3>
+                        <p class="why-card__text">At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we're committed to offering exceptional healthcare at affordable prices.</p>
                     </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="hero-card" style="height: 100%">
-                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>
-                            <div>
-                                <h4>Guaranteed Satisfaction</h4>
-                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="why-card why-card--blue">
+                        <div class="why-card__icon">
+                            <img src="{{ asset('frontend/satisfaction.png') }}" alt="Guaranteed Satisfaction">
                         </div>
+                        <h3 class="why-card__title">Guaranteed Satisfaction</h3>
+                        <p class="why-card__text">We're dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>
                     </div>
                 </div>
             </div>

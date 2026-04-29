@@ -15,6 +15,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mainul12501/css-common-helper-classes/helper.min.css">
     {!! $siteSetting ? $siteSetting->header_custom_code : '' !!}
     <link rel="stylesheet" href="{{ asset('/frontend/css/style.css') }}">
+    <style>
+        /* Show dropdown on hover */
+        .nav-item.dropdown:hover .home-service-menu {
+            display: block !important;
+        }
+
+        /* Optional: prevent flicker when moving mouse to dropdown */
+        .home-service-menu {
+            margin-top: 0 !important;
+        }
+    </style>
     @stack('style')
 </head>
 <body>
@@ -52,8 +63,8 @@
                 <li class="nav-item"><a class="nav-link active" href="{{ route('home') }}">Home</a></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ route('service-categories') }}" data-bs-toggle="dropdown">Services</a>
-                    <ul class="dropdown-menu">
+                    <a class="nav-link dropdown-toggle home-service-menu-btn" href="{{ route('service-categories') }}" data-bs-toggle="dropdown">Services</a>
+                    <ul class="dropdown-menu home-service-menu">
                         @foreach($services as $service)
                             <li><a class="dropdown-item" href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}">{{ $service->name ?? '' }}</a></li>
                         @endforeach

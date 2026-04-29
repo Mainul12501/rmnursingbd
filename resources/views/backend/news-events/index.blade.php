@@ -345,15 +345,13 @@
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
     <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js') }}"></script>
-    <script src="{{ asset('backend/template/valex/build/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
     <script>
         // Register FilePond plugins
         FilePond.registerPlugin(
             FilePondPluginImagePreview,
             FilePondPluginImageExifOrientation,
             FilePondPluginFileValidateSize,
-            FilePondPluginFileValidateType,
-            FilePondPluginFileEncode
+            FilePondPluginFileValidateType
         );
 
         // Common FilePond config
@@ -363,6 +361,7 @@
             labelIdle: 'Drag & Drop your image or <span class="filepond--label-action">Browse</span>',
             imagePreviewHeight: 140,
             credits: false,
+            storeAsFile: true,
         };
 
         // Create modal - single main image

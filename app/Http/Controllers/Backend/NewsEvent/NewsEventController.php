@@ -10,6 +10,7 @@ use App\Models\NewsEventCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class NewsEventController extends Controller
 {
@@ -39,11 +40,13 @@ class NewsEventController extends Controller
         ];
 
         if ($request->hasFile('main_image')) {
-            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+//            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+            $payload['main_image'] = CustomHelper::fileUpload($request->file('main_image'), 'news_event', 'main_image');
         }
 
         if ($request->hasFile('sub_images')) {
-            $payload['sub_images'] = $this->storeMultipleImages($request->file('sub_images'));
+//            $payload['sub_images'] = $this->storeMultipleImages($request->file('sub_images'));
+            $payload['sub_images'] = CustomHelper::fileUpload($request->file('sub_images'), 'news_event', 'sub_images');
         }
 
         NewsEvent::create($payload);
@@ -76,13 +79,15 @@ class NewsEventController extends Controller
         ];
 
         if ($request->hasFile('main_image')) {
-            $this->deleteImage($newsEvent->main_image);
-            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+//            $this->deleteImage($newsEvent->main_image);
+//            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+            $payload['main_image'] = CustomHelper::fileUpload($request->file('main_image'), 'news_event', 'main_image', null, null, $newsEvent->main_image ?? '');
         }
 
         if ($request->hasFile('sub_images')) {
-            $this->deleteImages($newsEvent->sub_images ?? []);
-            $payload['sub_images'] = $this->storeMultipleImages($request->file('sub_images'));
+//            $this->deleteImages($newsEvent->sub_images ?? []);
+//            $payload['sub_images'] = $this->storeMultipleImages($request->file('sub_images'));
+            $payload['sub_images'] = CustomHelper::fileUpload($request->file('sub_images'), 'news_event', 'sub_images', null, null, $newsEvent->sub_images ?? '');
         }
 
         $newsEvent->update($payload);
@@ -94,8 +99,8 @@ class NewsEventController extends Controller
 
     public function destroy(NewsEvent $newsEvent): RedirectResponse
     {
-        $this->deleteImage($newsEvent->main_image);
-        $this->deleteImages($newsEvent->sub_images ?? []);
+//        $this->deleteImage($newsEvent->main_image);
+//        $this->deleteImages($newsEvent->sub_images ?? []);
         $newsEvent->delete();
 
         return redirect()
