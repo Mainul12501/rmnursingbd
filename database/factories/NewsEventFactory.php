@@ -27,7 +27,7 @@ class NewsEventFactory extends Factory
             'main_image' => $this->faker->text(255),
             'sub_images' => $this->faker->text(),
             'main_content' => $this->faker->text(),
-            'status' => $this->faker->numberBetween(0, 127),
+            'status' => 1,
             'slug' => $this->faker->slug(),
             'news_event_category_id' => \App\Models\NewsEventCategory::factory(),
         ];

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class SiteSettingsController extends Controller
 {
@@ -209,11 +210,15 @@ class SiteSettingsController extends Controller
                 continue;
             }
 
-            if ($siteSetting && $siteSetting->{$field} && File::exists(public_path($siteSetting->{$field}))) {
-                File::delete(public_path($siteSetting->{$field}));
-            }
+//            if ($siteSetting && $siteSetting->{$field} && File::exists(public_path($siteSetting->{$field}))) {
+//                File::delete(public_path($siteSetting->{$field}));
+//            }
+//            if ($siteSetting && $siteSetting->{$field} && File::exists($siteSetting->{$field})) {
+//                File::delete(public_path($siteSetting->{$field}));
+//            }
 
-            $validated[$field] = $this->storeFile($request->file($field), $prefix);
+//            $validated[$field] = $this->storeFile($request->file($field), $prefix);
+            $validated[$field] = CustomHelper::fileUpload($request->file($field), $field, $prefix, null, null, $siteSetting->{$field} ?? null);
         }
 
         return $validated;

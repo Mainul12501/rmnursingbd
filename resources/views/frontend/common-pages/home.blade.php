@@ -227,7 +227,7 @@
                             @endif
                             <div class="service-body">
                                 <h3>{{ $service->name ?? 'Service Name' }}</h3>
-                                <p>{!! str()->words($service->page_content, 30, '...') !!}</p>
+                                <p>{{ str()->words(strip_tags($service->page_content), 30, '...') }}</p>
                                 <a href="{{ route('service-details', ['companyServiceSlug' => $service->slug]) }}" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -503,14 +503,14 @@
             <div class="row g-4">
                 @foreach($newsEvents as $newsEvent)
                     <div class="col-lg-4 col-md-6">
-                        <div class="news-card">
+                        <div class="news-card xxx">
                             <div class="news-img">
                                 <img src="{{ asset($newsEvent->main_image) }}" alt="News" class="">
                                 <span class="news-date">{{ $newsEvent->created_at->format('D M') }}</span>
                             </div>
                             <div class="news-body">
                                 <h3><a href="#">{{ $newsEvent->main_title ?? '' }}</a></h3>
-                                <p>{!! str()->words($newsEvent->main_content, 30, '...') !!}</p>
+                                <p>{{ str()->words(strip_tags($newsEvent->main_content), 30, '...') }}</p>
                                 <a href="{{ route('news-event-details', ['newsEventSlug' => $newsEvent->slug]) }}" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>

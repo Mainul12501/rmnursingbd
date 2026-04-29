@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             UserRoleTableSeeder::class,
 
 //            CompanyServiceSeeder::class,
-//            NewsEventCategorySeeder::class,
-//            NewsEventSeeder::class,
+            NewsEventCategorySeeder::class,
+            NewsEventSeeder::class,
 //            PageSeeder::class,
 //            AppointmentRequestSeeder::class,
         ]);

@@ -25,7 +25,7 @@ class NewsEventCategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
-            'status' => $this->faker->numberBetween(0, 127),
+            'status' => 1,
             'created_by' => \App\Models\User::factory(),
         ];
     }

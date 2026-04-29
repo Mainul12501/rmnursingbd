@@ -36,7 +36,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="top-bar-left xx">
                 <a href="tel:+88{{ $siteSetting ? $siteSetting->office_mobile : '' }}"><i class="fas fa-phone-alt"></i> {{ $siteSetting ? $siteSetting->office_mobile : '' }}</a>
-                <a href="tel:+88{{ $siteSetting ? $siteSetting->office_address : '' }}"><i class="fas fa-address-card"></i> {{ $siteSetting ? $siteSetting->office_address : '' }}</a>
+                <a href="tel:+88{{ $siteSetting ? $siteSetting->office_address : '' }}" class="ms-3"><i class="fas fa-address-card"></i> {{ $siteSetting ? $siteSetting->office_address : '' }}</a>
             </div>
             <div class="top-bar-right">
                 <a target="_blank" href="{{ $siteSetting ? $siteSetting->linkedin : '' }}"><i class="fab fa-linkedin-in"></i></a>
