@@ -9,6 +9,7 @@ use App\Models\Page;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Mainul\CustomHelperFunctions\Helpers\CustomHelper;
 
 class PageController extends Controller
 {
@@ -38,12 +39,13 @@ class PageController extends Controller
         ];
 
         if ($request->hasFile('main_image')) {
-            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+//            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+            $payload['main_image'] = CustomHelper::fileUpload($request->file('main_image'), 'pages', 'page');
         }
 
-        if ($request->hasFile('sub_images')) {
-            $payload['sub_images'] = json_encode($this->storeMultipleImages($request->file('sub_images')));
-        }
+//        if ($request->hasFile('sub_images')) {
+//            $payload['sub_images'] = json_encode($this->storeMultipleImages($request->file('sub_images')));
+//        }
 
         Page::create($payload);
 
@@ -76,14 +78,15 @@ class PageController extends Controller
         ];
 
         if ($request->hasFile('main_image')) {
-            $this->deleteImage($page->main_image);
-            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+//            $this->deleteImage($page->main_image);
+//            $payload['main_image'] = $this->storeImage($request->file('main_image'), 'main');
+            $payload['main_image'] = CustomHelper::fileUpload($request->file('main_image'), 'pages', 'page', null, null, $page->main_image ?? null);
         }
 
-        if ($request->hasFile('sub_images')) {
-            $this->deleteImages(json_decode($page->sub_images ?? '[]', true) ?: []);
-            $payload['sub_images'] = json_encode($this->storeMultipleImages($request->file('sub_images')));
-        }
+//        if ($request->hasFile('sub_images')) {
+//            $this->deleteImages(json_decode($page->sub_images ?? '[]', true) ?: []);
+//            $payload['sub_images'] = json_encode($this->storeMultipleImages($request->file('sub_images')));
+//        }
 
         $page->update($payload);
 

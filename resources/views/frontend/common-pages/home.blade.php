@@ -59,22 +59,22 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div id="carouselExampleCaptions" class="carousel slide">
+                        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel" >
                             <div class="carousel-indicators">
                                 @foreach($sliders as $index => $slider)
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" ></button>
                                 @endforeach
-{{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>--}}
-{{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
+                                {{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>--}}
+                                {{--                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
                             </div>
                             <div class="carousel-inner">
                                 @foreach($sliders as $key => $slider)
                                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                                         <img src="{{ asset($slider->image) }}" class="d-block w-100" alt="{{ $slider->title }}" style="height: 450px">
-{{--                                        <div class="carousel-caption d-none d-md-block">--}}
-{{--                                            <h1>{{ $slider->title ?? '' }}</h1>--}}
-{{--                                            <p>{{ $slider->content ?? '' }}</p>--}}
-{{--                                        </div>--}}
+                                        {{--                                        <div class="carousel-caption d-none d-md-block">--}}
+                                        {{--                                            <h1>{{ $slider->title ?? '' }}</h1>--}}
+                                        {{--                                            <p>{{ $slider->content ?? '' }}</p>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                 @endforeach
                             </div>
@@ -93,61 +93,61 @@
         </section>
     @endif
 
-{{--    <section class="hero-section">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row align-items-center">--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <div class="hero-content">--}}
-{{--                        <h1>HOME<br>CAREGIVER<br>SERVICES</h1>--}}
-{{--                        <p>We provide professional, reliable, and compassionate home healthcare services right at your doorstep in Dhaka.</p>--}}
-{{--                        <div class="hero-buttons">--}}
-{{--                            <a href="{{ route('contact-us') }}" class="btn btn-hero-green">Contact Us</a>--}}
-{{--                            <a href="{{ route('service-categories') }}" class="btn btn-hero-outline">Our Services</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6 d-none d-lg-block">--}}
-{{--                    <div class="hero-image">--}}
-{{--                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=500&fit=crop" alt="Home Care Services" class="img-fluid hero-img-main">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <!-- Hero bottom cards -->--}}
-{{--        <div class="hero-bottom-cards">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row g-3">--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>Professional Nurses</h4>--}}
-{{--                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>24/7 Available</h4>--}}
-{{--                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-lg-4 col-md-4">--}}
-{{--                        <div class="hero-card" style="height: 100%">--}}
-{{--                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>--}}
-{{--                            <div>--}}
-{{--                                <h4>Guaranteed Satisfaction</h4>--}}
-{{--                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    {{--    <section class="hero-section">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row align-items-center">--}}
+    {{--                <div class="col-lg-6">--}}
+    {{--                    <div class="hero-content">--}}
+    {{--                        <h1>HOME<br>CAREGIVER<br>SERVICES</h1>--}}
+    {{--                        <p>We provide professional, reliable, and compassionate home healthcare services right at your doorstep in Dhaka.</p>--}}
+    {{--                        <div class="hero-buttons">--}}
+    {{--                            <a href="{{ route('contact-us') }}" class="btn btn-hero-green">Contact Us</a>--}}
+    {{--                            <a href="{{ route('service-categories') }}" class="btn btn-hero-outline">Our Services</a>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <div class="col-lg-6 d-none d-lg-block">--}}
+    {{--                    <div class="hero-image">--}}
+    {{--                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=500&fit=crop" alt="Home Care Services" class="img-fluid hero-img-main">--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--        <!-- Hero bottom cards -->--}}
+    {{--        <div class="hero-bottom-cards">--}}
+    {{--            <div class="container">--}}
+    {{--                <div class="row g-3">--}}
+    {{--                    <div class="col-lg-4 col-md-4">--}}
+    {{--                        <div class="hero-card" style="height: 100%">--}}
+    {{--                            <div class="hero-card-icon"><i class="fas fa-user-nurse"></i></div>--}}
+    {{--                            <div>--}}
+    {{--                                <h4>Professional Nurses</h4>--}}
+    {{--                                <p>Experienced, compassionate nurses provide personalized in-home care for recovery, chronic conditions and daily support.</p>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-lg-4 col-md-4">--}}
+    {{--                        <div class="hero-card" style="height: 100%">--}}
+    {{--                            <div class="hero-card-icon"><i class="fas fa-clock"></i></div>--}}
+    {{--                            <div>--}}
+    {{--                                <h4>24/7 Available</h4>--}}
+    {{--                                <p>At {{ $siteSetting->meta_title ?? 'RM Nursing BD' }}, we’re committed to offering exceptional healthcare 24/7.</p>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-lg-4 col-md-4">--}}
+    {{--                        <div class="hero-card" style="height: 100%">--}}
+    {{--                            <div class="hero-card-icon"><i class="fas fa-phone-alt"></i></div>--}}
+    {{--                            <div>--}}
+    {{--                                <h4>Guaranteed Satisfaction</h4>--}}
+    {{--                                <p>We’re dedicated to exceeding your expectations, offering a comprehensive Satisfaction Guarantee on all our services.</p>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
 
     <!-- ====== WHY CHOOSE US SECTION ====== -->
     <section class="why-choose-section" id="generateContentHere">
@@ -234,66 +234,66 @@
                     </div>
                 @endforeach
 
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="service-card">--}}
-{{--                        <div class="service-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=250&fit=crop" alt="Elderly Care">--}}
-{{--                        </div>--}}
-{{--                        <div class="service-body">--}}
-{{--                            <h3>Elderly Home Care Services</h3>--}}
-{{--                            <p>Dedicated caregivers for elderly family members providing daily assistance, medication management, and companionship at home.</p>--}}
-{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="service-card">--}}
-{{--                        <div class="service-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1b89?w=400&h=250&fit=crop" alt="Caregiver Service">--}}
-{{--                        </div>--}}
-{{--                        <div class="service-body">--}}
-{{--                            <h3>Caregiver Home Services</h3>--}}
-{{--                            <p>Trained and compassionate caregivers to assist patients with daily living activities, personal hygiene, and mobility support.</p>--}}
-{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="service-card">--}}
-{{--                        <div class="service-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=250&fit=crop" alt="Patient Care">--}}
-{{--                        </div>--}}
-{{--                        <div class="service-body">--}}
-{{--                            <h3>Patient Care Attendant</h3>--}}
-{{--                            <p>Experienced patient care attendants providing round-the-clock support for bedridden and critically ill patients.</p>--}}
-{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="service-card">--}}
-{{--                        <div class="service-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1583912267550-d6c2ac3abe3f?w=400&h=250&fit=crop" alt="Medical Equipment">--}}
-{{--                        </div>--}}
-{{--                        <div class="service-body">--}}
-{{--                            <h3>Medical Equipment Sales & Rental</h3>--}}
-{{--                            <p>Hospital beds, wheelchairs, oxygen concentrators, and other essential medical equipment available for sale and rental.</p>--}}
-{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="service-card">--}}
-{{--                        <div class="service-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=250&fit=crop" alt="Physiotherapy">--}}
-{{--                        </div>--}}
-{{--                        <div class="service-body">--}}
-{{--                            <h3>Physiotherapy Home Services</h3>--}}
-{{--                            <p>Licensed physiotherapists providing rehabilitation exercises, pain management, and mobility improvement at your home.</p>--}}
-{{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="service-card">--}}
+                {{--                        <div class="service-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=250&fit=crop" alt="Elderly Care">--}}
+                {{--                        </div>--}}
+                {{--                        <div class="service-body">--}}
+                {{--                            <h3>Elderly Home Care Services</h3>--}}
+                {{--                            <p>Dedicated caregivers for elderly family members providing daily assistance, medication management, and companionship at home.</p>--}}
+                {{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="service-card">--}}
+                {{--                        <div class="service-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1b89?w=400&h=250&fit=crop" alt="Caregiver Service">--}}
+                {{--                        </div>--}}
+                {{--                        <div class="service-body">--}}
+                {{--                            <h3>Caregiver Home Services</h3>--}}
+                {{--                            <p>Trained and compassionate caregivers to assist patients with daily living activities, personal hygiene, and mobility support.</p>--}}
+                {{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="service-card">--}}
+                {{--                        <div class="service-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=250&fit=crop" alt="Patient Care">--}}
+                {{--                        </div>--}}
+                {{--                        <div class="service-body">--}}
+                {{--                            <h3>Patient Care Attendant</h3>--}}
+                {{--                            <p>Experienced patient care attendants providing round-the-clock support for bedridden and critically ill patients.</p>--}}
+                {{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="service-card">--}}
+                {{--                        <div class="service-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1583912267550-d6c2ac3abe3f?w=400&h=250&fit=crop" alt="Medical Equipment">--}}
+                {{--                        </div>--}}
+                {{--                        <div class="service-body">--}}
+                {{--                            <h3>Medical Equipment Sales & Rental</h3>--}}
+                {{--                            <p>Hospital beds, wheelchairs, oxygen concentrators, and other essential medical equipment available for sale and rental.</p>--}}
+                {{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="service-card">--}}
+                {{--                        <div class="service-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=250&fit=crop" alt="Physiotherapy">--}}
+                {{--                        </div>--}}
+                {{--                        <div class="service-body">--}}
+                {{--                            <h3>Physiotherapy Home Services</h3>--}}
+                {{--                            <p>Licensed physiotherapists providing rehabilitation exercises, pain management, and mobility improvement at your home.</p>--}}
+                {{--                            <a href="#" class="service-read-more">Read More <i class="fas fa-arrow-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </section>
@@ -457,37 +457,37 @@
                 </div>
 
 
-{{--                    <div class="col-lg-4 col-md-6">--}}
-{{--                        <div class="review-card">--}}
-{{--                            <div class="review-stars">--}}
-{{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
-{{--                            </div>--}}
-{{--                            <p>"We hired a caregiver for my elderly mother and the service has been excellent. The caregiver is kind, patient, and treats my mother like family."</p>--}}
-{{--                            <div class="review-author">--}}
-{{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
-{{--                                <div>--}}
-{{--                                    <h4>Nasreen Begum</h4>--}}
-{{--                                    <span>Dhanmondi, Dhaka</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-lg-4 col-md-6">--}}
-{{--                        <div class="review-card">--}}
-{{--                            <div class="review-stars">--}}
-{{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
-{{--                            </div>--}}
-{{--                            <p>"Quick response time and professional service. The oxygen cylinder was delivered within an hour. Their 24/7 availability is truly a lifesaver."</p>--}}
-{{--                            <div class="review-author">--}}
-{{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
-{{--                                <div>--}}
-{{--                                    <h4>Kamal Hossain</h4>--}}
-{{--                                    <span>Gulshan, Dhaka</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                </div>
+                {{--                    <div class="col-lg-4 col-md-6">--}}
+                {{--                        <div class="review-card">--}}
+                {{--                            <div class="review-stars">--}}
+                {{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
+                {{--                            </div>--}}
+                {{--                            <p>"We hired a caregiver for my elderly mother and the service has been excellent. The caregiver is kind, patient, and treats my mother like family."</p>--}}
+                {{--                            <div class="review-author">--}}
+                {{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
+                {{--                                <div>--}}
+                {{--                                    <h4>Nasreen Begum</h4>--}}
+                {{--                                    <span>Dhanmondi, Dhaka</span>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="col-lg-4 col-md-6">--}}
+                {{--                        <div class="review-card">--}}
+                {{--                            <div class="review-stars">--}}
+                {{--                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>--}}
+                {{--                            </div>--}}
+                {{--                            <p>"Quick response time and professional service. The oxygen cylinder was delivered within an hour. Their 24/7 availability is truly a lifesaver."</p>--}}
+                {{--                            <div class="review-author">--}}
+                {{--                                <div class="review-avatar"><i class="fas fa-user"></i></div>--}}
+                {{--                                <div>--}}
+                {{--                                    <h4>Kamal Hossain</h4>--}}
+                {{--                                    <span>Gulshan, Dhaka</span>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+            </div>
             </div>
         </section>
     @endif
@@ -517,32 +517,32 @@
                     </div>
                 @endforeach
 
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="news-card">--}}
-{{--                        <div class="news-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=220&fit=crop" alt="News">--}}
-{{--                            <span class="news-date">18 Feb</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="news-body">--}}
-{{--                            <h3><a href="#">Elderly Care Tips: How to Care for Aging Parents at Home</a></h3>--}}
-{{--                            <p>Practical tips and advice for families caring for elderly parents at home with professional support...</p>--}}
-{{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6">--}}
-{{--                    <div class="news-card">--}}
-{{--                        <div class="news-img">--}}
-{{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=220&fit=crop" alt="News">--}}
-{{--                            <span class="news-date">05 Jan</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="news-body">--}}
-{{--                            <h3><a href="#">Oxygen Cylinder Services Now Available Across All Dhaka Areas</a></h3>--}}
-{{--                            <p>We have expanded our oxygen cylinder delivery and rental services to cover all major areas of Dhaka...</p>--}}
-{{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="news-card">--}}
+                {{--                        <div class="news-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=220&fit=crop" alt="News">--}}
+                {{--                            <span class="news-date">18 Feb</span>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="news-body">--}}
+                {{--                            <h3><a href="#">Elderly Care Tips: How to Care for Aging Parents at Home</a></h3>--}}
+                {{--                            <p>Practical tips and advice for families caring for elderly parents at home with professional support...</p>--}}
+                {{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                {{--                <div class="col-lg-4 col-md-6">--}}
+                {{--                    <div class="news-card">--}}
+                {{--                        <div class="news-img">--}}
+                {{--                            <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=220&fit=crop" alt="News">--}}
+                {{--                            <span class="news-date">05 Jan</span>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="news-body">--}}
+                {{--                            <h3><a href="#">Oxygen Cylinder Services Now Available Across All Dhaka Areas</a></h3>--}}
+                {{--                            <p>We have expanded our oxygen cylinder delivery and rental services to cover all major areas of Dhaka...</p>--}}
+                {{--                            <a href="#" class="read-more-link">Read More <i class="fas fa-long-arrow-alt-right"></i></a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </section>
@@ -585,18 +585,18 @@
                                     <input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" placeholder="Subject" value="{{ old('subject') }}" data-label="Subject" required>
                                     <div class="invalid-feedback">@error('subject') {{ $message }} @enderror</div>
                                 </div>
-{{--                                <div class="col-md-6">--}}
-{{--                                    <select class="form-select">--}}
-{{--                                        <option selected disabled>Select Service</option>--}}
-{{--                                        <option>Home Care Nursing</option>--}}
-{{--                                        <option>Elderly Home Care</option>--}}
-{{--                                        <option>Caregiver Services</option>--}}
-{{--                                        <option>Patient Care Attendant</option>--}}
-{{--                                        <option>Medical Equipment</option>--}}
-{{--                                        <option>Oxygen Cylinder</option>--}}
-{{--                                        <option>Physiotherapy</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="col-md-6">--}}
+                                {{--                                    <select class="form-select">--}}
+                                {{--                                        <option selected disabled>Select Service</option>--}}
+                                {{--                                        <option>Home Care Nursing</option>--}}
+                                {{--                                        <option>Elderly Home Care</option>--}}
+                                {{--                                        <option>Caregiver Services</option>--}}
+                                {{--                                        <option>Patient Care Attendant</option>--}}
+                                {{--                                        <option>Medical Equipment</option>--}}
+                                {{--                                        <option>Oxygen Cylinder</option>--}}
+                                {{--                                        <option>Physiotherapy</option>--}}
+                                {{--                                    </select>--}}
+                                {{--                                </div>--}}
                                 <div class="col-12">
                                     <textarea class="form-control @error('message') is-invalid @enderror" name="message" rows="5" placeholder="Your Message" data-label="Message">{{ old('message') }}</textarea>
                                     <div class="invalid-feedback">@error('message') {{ $message }} @enderror</div>
